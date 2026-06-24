@@ -1,0 +1,14 @@
+node_modules/
+.env
+.env.local
+*.log
+dist/
+.git/
+.DS_Store
+*.local
+chrome-test-data*/
+temp-chrome-profile/
+test-results/
+test-results*/
+*.spec.ts
+playwright.config.ts
