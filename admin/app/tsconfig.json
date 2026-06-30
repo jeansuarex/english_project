@@ -4,7 +4,6 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "types": ["vinxi/types/client"],
     "strict": true,
     "skipLibCheck": true,
     "noEmit": true,
@@ -13,6 +12,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*", "app.config.ts"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
 }

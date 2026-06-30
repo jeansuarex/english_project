@@ -21,53 +21,8 @@ function createTables() {
   if (!db) throw new Error('Database not connected')
 
   db.run(`CREATE TABLE IF NOT EXISTS users (
-    id TEXT PRIMARY KEY, email TEXT, name TEXT, plan TEXT DEFAULT 'individual',
-    examsRemaining INTEGER DEFAULT 0, examsCompleted INTEGER DEFAULT 0,
-    totalScore INTEGER DEFAULT 0, averageScore INTEGER DEFAULT 0,
+    id TEXT PRIMARY KEY, email TEXT, name TEXT,
     createdAt TEXT, clerkId TEXT, role TEXT DEFAULT 'user'
-  )`)
-
-  db.run(`CREATE TABLE IF NOT EXISTS tests (
-    id TEXT PRIMARY KEY, userId TEXT, status TEXT,
-    scheduledDate TEXT, activatedAt TEXT, expiresAt TEXT, completedAt TEXT,
-    score INTEGER, proficiencyLevel TEXT, responses TEXT, feedback TEXT,
-    createdAt TEXT, updatedAt TEXT
-  )`)
-
-  db.run(`CREATE TABLE IF NOT EXISTS test_links (
-    id TEXT PRIMARY KEY, token TEXT, testId TEXT, userId TEXT,
-    used INTEGER DEFAULT 0, expiresAt TEXT, createdAt TEXT
-  )`)
-
-  db.run(`CREATE TABLE IF NOT EXISTS subscriptions (
-    id TEXT PRIMARY KEY, userId TEXT, plan TEXT, status TEXT,
-    stripeSubscriptionId TEXT, stripeCustomerId TEXT,
-    currentPeriodStart TEXT, currentPeriodEnd TEXT,
-    cancelAtPeriodEnd INTEGER DEFAULT 0, createdAt TEXT, updatedAt TEXT
-  )`)
-
-  db.run(`CREATE TABLE IF NOT EXISTS exams (
-    id TEXT PRIMARY KEY, title TEXT, description TEXT,
-    duration INTEGER, passingScore INTEGER DEFAULT 70, price INTEGER,
-    isActive INTEGER DEFAULT 1, questions TEXT, createdAt TEXT, updatedAt TEXT
-  )`)
-
-  db.run(`CREATE TABLE IF NOT EXISTS attempts (
-    id TEXT PRIMARY KEY, userId TEXT, examId TEXT,
-    startedAt TEXT, submittedAt TEXT, status TEXT,
-    answers TEXT, score INTEGER, passingScore INTEGER, passed INTEGER
-  )`)
-
-  db.run(`CREATE TABLE IF NOT EXISTS exam_sessions (
-    id TEXT PRIMARY KEY, userId TEXT, examId TEXT,
-    sessionToken TEXT, sessionCode TEXT, status TEXT,
-    startedAt TEXT, submittedAt TEXT, answers TEXT, score INTEGER,
-    createdAt TEXT, expiresAt TEXT
-  )`)
-
-  db.run(`CREATE TABLE IF NOT EXISTS magic_links (
-    id TEXT PRIMARY KEY, token TEXT, examId TEXT, email TEXT,
-    createdAt TEXT, expiresAt TEXT, used INTEGER DEFAULT 0, usedAt TEXT
   )`)
 
   db.run(`CREATE TABLE IF NOT EXISTS sessions (
@@ -80,20 +35,44 @@ function createTables() {
     createdAt TEXT, expiresAt TEXT, used INTEGER DEFAULT 0
   )`)
 
-  db.run(`CREATE TABLE IF NOT EXISTS payments (
-    id TEXT PRIMARY KEY, userId TEXT, amount INTEGER,
-    status TEXT, stripePaymentId TEXT, createdAt TEXT
+  db.run(`CREATE TABLE IF NOT EXISTS resources (
+    id TEXT PRIMARY KEY, userId TEXT, title TEXT,
+    filename TEXT, data BLOB, createdAt TEXT
+  )`)
+  // Migrate from old schema (storagePath) to new schema (data BLOB)
+  try { db.run('ALTER TABLE resources DROP COLUMN storagePath') } catch { }
+
+  db.run(`CREATE TABLE IF NOT EXISTS reading_sessions (
+    id TEXT PRIMARY KEY, userId TEXT, resourceId TEXT,
+    vocabulary TEXT, lastPage INTEGER DEFAULT 1, updatedAt TEXT
+  )`)
+
+  db.run(`CREATE TABLE IF NOT EXISTS study_activity (
+    id TEXT PRIMARY KEY, userId TEXT, date TEXT, count INTEGER DEFAULT 1
+  )`)
+
+  db.run(`CREATE TABLE IF NOT EXISTS learned_words (
+    id TEXT PRIMARY KEY, userId TEXT, word TEXT, learnedAt TEXT,
+    UNIQUE(userId, word)
+  )`)
+
+  db.run(`CREATE TABLE IF NOT EXISTS game_sessions (
+    id TEXT PRIMARY KEY, userId TEXT, gameType TEXT,
+    correct INTEGER DEFAULT 0, wrong INTEGER DEFAULT 0,
+    totalRounds INTEGER DEFAULT 0, completedAt TEXT
   )`)
 
   // Indexes for common queries
   db.run('CREATE INDEX IF NOT EXISTS idx_users_email ON users(email)')
   db.run('CREATE INDEX IF NOT EXISTS idx_users_clerkId ON users(clerkId)')
-  db.run('CREATE INDEX IF NOT EXISTS idx_tests_userId ON tests(userId)')
-  db.run('CREATE INDEX IF NOT EXISTS idx_test_links_token ON test_links(token)')
-  db.run('CREATE INDEX IF NOT EXISTS idx_subs_userId ON subscriptions(userId)')
   db.run('CREATE INDEX IF NOT EXISTS idx_sessions_token ON sessions(token)')
-  db.run('CREATE INDEX IF NOT EXISTS idx_exam_sessions_token ON exam_sessions(sessionToken)')
-  db.run('CREATE INDEX IF NOT EXISTS idx_magic_links_token ON magic_links(token)')
+  db.run('CREATE INDEX IF NOT EXISTS idx_resources_userId ON resources(userId)')
+  db.run('CREATE INDEX IF NOT EXISTS idx_reading_sessions_userId ON reading_sessions(userId)')
+  db.run('CREATE INDEX IF NOT EXISTS idx_reading_sessions_resourceId ON reading_sessions(resourceId)')
+  db.run('CREATE INDEX IF NOT EXISTS idx_study_activity_userId ON study_activity(userId)')
+  db.run('CREATE INDEX IF NOT EXISTS idx_study_activity_date ON study_activity(date)')
+  db.run('CREATE INDEX IF NOT EXISTS idx_learned_words_userId ON learned_words(userId)')
+  db.run('CREATE INDEX IF NOT EXISTS idx_game_sessions_userId ON game_sessions(userId)')
 }
 
 type QueryValue = string | number | boolean | null | undefined | Date | { $gt?: any; $gte?: any; $lt?: any; $lte?: any; $ne?: any }
@@ -151,9 +130,9 @@ function rowToDoc(table: string, row: any): any {
   const doc: any = { _id: row.id }
   for (const [key, value] of Object.entries(row)) {
     if (key === 'id') continue
-    if (key === 'used' || key === 'cancelAtPeriodEnd' || key === 'isActive' || key === 'passed') {
+    if (key === 'used') {
       doc[key] = toBool(value)
-    } else if (key === 'responses' || key === 'feedback' || key === 'questions' || key === 'answers') {
+    } else if (key === 'vocabulary') {
       try { doc[key] = JSON.parse(value as string) } catch { doc[key] = value }
     } else {
       doc[key] = value
@@ -172,9 +151,9 @@ function insertDoc(table: string, doc: any): { insertedId: string } {
 
   for (const [key, value] of Object.entries(doc)) {
     if (key === '_id') continue
-    if (key === 'used' || key === 'cancelAtPeriodEnd' || key === 'isActive' || key === 'passed') {
+    if (key === 'used') {
       flat[key] = value ? 1 : 0
-    } else if (value !== null && typeof value === 'object' && !(value instanceof Date)) {
+    } else if (value !== null && typeof value === 'object' && !(value instanceof Date) && !(value instanceof Uint8Array)) {
       flat[key] = JSON.stringify(value)
     } else if (value instanceof Date) {
       flat[key] = value.toISOString()
@@ -246,14 +225,11 @@ function updateOne(table: string, query: Query, update: UpdateOp) {
   delete (setFields as any)._id
 
   if (setFields.used !== undefined) setFields.used = setFields.used ? 1 : 0
-  if (setFields.cancelAtPeriodEnd !== undefined) setFields.cancelAtPeriodEnd = setFields.cancelAtPeriodEnd ? 1 : 0
-  if (setFields.isActive !== undefined) setFields.isActive = setFields.isActive ? 1 : 0
-  if (setFields.passed !== undefined) setFields.passed = setFields.passed ? 1 : 0
   if (setFields.updatedAt !== undefined && typeof setFields.updatedAt === 'string') { /* keep */ }
 
   for (const [k, v] of Object.entries(setFields)) {
     if (v !== null && typeof v === 'object' && !(v instanceof Date) && !Array.isArray(v)) {
-      // keep scalar — don't JSON.stringify flat objects like planLimits
+      // keep scalar
     } else if (v !== null && (typeof v === 'object' || Array.isArray(v))) {
       setFields[k] = JSON.stringify(v)
     } else if (v instanceof Date) {
@@ -303,9 +279,6 @@ function findOneAndUpdate(table: string, query: Query, update: UpdateOp, options
 
   if (options?.returnDocument === 'after') {
     const updated = findOne(table, query)
-    if (updated && 'passed' in update && '$set' in update) {
-      updated.passed = (update.$set as any).passed ?? updated.passed
-    }
     return updated
   }
   return doc
@@ -344,16 +317,14 @@ export function getDB(): Database {
   return db
 }
 export function getUsersCollection(): Collection { return coll('users') }
-export function getTestsCollection(): Collection { return coll('tests') }
-export function getTestLinksCollection(): Collection { return coll('test_links') }
-export function getSubscriptionsCollection(): Collection { return coll('subscriptions') }
-export function getExamsCollection(): Collection { return coll('exams') }
-export function getAttemptsCollection(): Collection { return coll('attempts') }
-export function getExamSessionsCollection(): Collection { return coll('exam_sessions') }
-export function getMagicLinksCollection(): Collection { return coll('magic_links') }
 export function getSessionsCollection(): Collection { return coll('sessions') }
 export function getVerificationCodesCollection(): Collection { return coll('verification_codes') }
-export function getPaymentsCollection(): Collection { return coll('payments') }
+export function getResourcesCollection(): Collection { return coll('resources') }
+export function getReadingSessionsCollection(): Collection { return coll('reading_sessions') }
+export function getStudyActivityCollection(): Collection { return coll('study_activity') }
+export function getLearnedWordsCollection(): Collection { return coll('learned_words') }
+export function getGameSessionsCollection(): Collection { return coll('game_sessions') }
+
 
 export async function closeDB(): Promise<void> {
   if (db) {

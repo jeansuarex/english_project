@@ -6,13 +6,10 @@ import { connectDB } from './db'
 
 import authRoutes from './routes/auth'
 import userRoutes from './routes/users'
-import testRoutes from './routes/tests'
-import subscriptionRoutes from './routes/subscriptions'
-import paymentRoutes from './routes/payments'
-import examRoutes from './routes/exams'
-import attemptRoutes from './routes/attempts'
-import sessionRoutes from './routes/sessions'
-import emailRoutes from './routes/email'
+import resourceRoutes from './routes/resources'
+import activityRoutes from './routes/activity'
+import vocabularyRoutes from './routes/vocabulary'
+import progressRoutes from './routes/progress'
 
 const app = new Hono()
 
@@ -26,13 +23,10 @@ app.get('/health', (c) => c.json({ status: 'ok', timestamp: new Date().toISOStri
 
 app.route('/api/auth', authRoutes)
 app.route('/api/users', userRoutes)
-app.route('/api/tests', testRoutes)
-app.route('/api/subscriptions', subscriptionRoutes)
-app.route('/api/payments', paymentRoutes)
-app.route('/api/exams', examRoutes)
-app.route('/api/attempts', attemptRoutes)
-app.route('/api/sessions', sessionRoutes)
-app.route('/api/email', emailRoutes)
+app.route('/api/resources', resourceRoutes)
+app.route('/api/activity', activityRoutes)
+app.route('/api/vocabulary', vocabularyRoutes)
+app.route('/api/progress', progressRoutes)
 
 const port = parseInt(process.env.PORT || '3001')
 

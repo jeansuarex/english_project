@@ -16,8 +16,7 @@ export default function Login() {
         background: 'var(--bg-cream)',
       }}>
         <SignUp
-          afterSignUpUrl="/dashboard"
-          afterSignInUrl="/dashboard"
+          fallbackRedirectUrl="/dashboard"
           routing="path"
           path="/login"
           signInUrl="/login?mode=signin"
@@ -36,8 +35,7 @@ export default function Login() {
       background: 'var(--bg-cream)',
     }}>
       <SignIn
-        afterSignUpUrl="/dashboard"
-        afterSignInUrl="/dashboard"
+        fallbackRedirectUrl="/dashboard"
         routing="path"
         path="/login"
         signUpUrl="/login?mode=signup"

@@ -2,6 +2,7 @@
   --bg-cream: #F4F1EA;
   --card-white: #FDFCF9;
   --sage: #6B7F67;
+  --sage-light: #8A9A7E;
   --olive: #C8D1B7;
   --text-primary: #333333;
   --text-subtle: #6B7F67;
@@ -11,6 +12,82 @@
   --radius-md: 20px;
   --font-heading: 'Playfair Display', Georgia, serif;
   --font-body: 'Inter', -apple-system, sans-serif;
+  --bg-gradient-start: #F4F1EA;
+  --bg-gradient-end: #EDE9E0;
+  --bg-overlay: rgba(253, 252, 249, 0.7);
+  --bg-overlay-solid: rgba(253, 252, 249, 0.9);
+  --border-light: rgba(200, 209, 183, 0.4);
+  --score-bg-correct: rgba(107, 127, 103, 0.1);
+  --score-bg-wrong: rgba(212, 165, 165, 0.15);
+  --modal-overlay: rgba(0, 0, 0, 0.5);
+  --sage-gradient: linear-gradient(135deg, #6B7F67 0%, #8A9A7E 100%);
+  --sage-gradient-end: #A8B8A0;
+  --danger-color: #D4A5A5;
+  --danger-dark: #C49494;
+  --danger-gradient: linear-gradient(135deg, #D4A5A5 0%, #C49494 100%);
+  --error-color: #c0392b;
+  --input-bg: white;
+  --surface-muted: rgba(200, 209, 183, 0.3);
+  --surface-muted-hover: #C8D1B7;
+  --surface-muted-hover-text: #333333;
+  --border-subtle: rgba(200, 209, 183, 0.2);
+  --hero-btn-bg: #ffffff;
+  --hero-btn-text: #6B7F67;
+  --hero-btn-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  --hero-btn-shadow-hover: 0 12px 30px rgba(0, 0, 0, 0.2);
+  --inset-border: 0 0 0 1px rgba(200, 209, 183, 0.2);
+  --input-disabled-bg: rgba(200, 209, 183, 0.15);
+  --timer-track: rgba(200, 209, 183, 0.3);
+  --sidebar-border: var(--olive);
+  --resource-card-bg: var(--card-white);
+  --resource-card-border: var(--olive);
+  --resource-card-border-hover: var(--sage);
+  --hero-shadow: 0 12px 40px rgba(107, 127, 103, 0.25);
+  --activity-active: #6B7F67;
+}
+
+[data-theme="dark"] {
+  --bg-cream: #0f0f0f;
+  --card-white: #1a1a1c;
+  --sage: #9CAF8B;
+  --sage-light: #B0C4A0;
+  --olive: #2c2c2e;
+  --text-primary: #e4e4e7;
+  --text-subtle: #a1a1aa;
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.5);
+  --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.6);
+  --bg-gradient-start: #0f0f0f;
+  --bg-gradient-end: #1a1a1c;
+  --bg-overlay: rgba(26, 26, 28, 0.85);
+  --bg-overlay-solid: rgba(26, 26, 28, 0.95);
+  --border-light: rgba(255, 255, 255, 0.07);
+  --score-bg-correct: rgba(156, 175, 139, 0.15);
+  --score-bg-wrong: rgba(212, 165, 165, 0.2);
+  --modal-overlay: rgba(0, 0, 0, 0.75);
+  --sage-gradient: linear-gradient(135deg, #6B7F67 0%, #8A9A7E 100%);
+  --sage-gradient-end: #A8B8A0;
+  --danger-color: #D4A5A5;
+  --danger-dark: #C49494;
+  --danger-gradient: linear-gradient(135deg, #D4A5A5 0%, #C49494 100%);
+  --error-color: #e74c3c;
+  --input-bg: #252527;
+  --surface-muted: rgba(255, 255, 255, 0.06);
+  --surface-muted-hover: rgba(255, 255, 255, 0.1);
+  --surface-muted-hover-text: #e4e4e7;
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --hero-btn-bg: rgba(255, 255, 255, 0.9);
+  --hero-btn-text: #6B7F67;
+  --hero-btn-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+  --hero-btn-shadow-hover: 0 12px 30px rgba(0, 0, 0, 0.45);
+  --inset-border: 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --input-disabled-bg: rgba(255, 255, 255, 0.05);
+  --timer-track: rgba(255, 255, 255, 0.08);
+  --sidebar-border: rgba(255, 255, 255, 0.07);
+  --resource-card-bg: #1a1a1c;
+  --resource-card-border: rgba(255, 255, 255, 0.07);
+  --resource-card-border-hover: var(--sage);
+  --hero-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  --activity-active: #9CAF8B;
 }
 
 * {
@@ -29,6 +106,7 @@ body {
   color: var(--text-primary);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -72,4 +150,29 @@ input, textarea, select {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--sage);
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

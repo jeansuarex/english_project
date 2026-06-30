@@ -1,0 +1,814 @@
+[
+  {
+    "id": 1,
+    "base": "She writes a letter every day",
+    "transformations": [
+      { "tense": "past simple", "correct": "She wrote a letter every day", "options": ["She wrote a letter every day", "She writed a letter every day", "She was write a letter every day"] },
+      { "tense": "present continuous", "correct": "She is writing a letter now", "options": ["She is writing a letter now", "She writes a letter now", "She writing a letter now"] },
+      { "tense": "present perfect", "correct": "She has written a letter", "options": ["She has written a letter", "She has wrote a letter", "She have written a letter"] }
+    ]
+  },
+  {
+    "id": 2,
+    "base": "They play soccer on weekends",
+    "transformations": [
+      { "tense": "past simple", "correct": "They played soccer on weekends", "options": ["They played soccer on weekends", "They playd soccer on weekends", "They were play soccer on weekends"] },
+      { "tense": "present continuous", "correct": "They are playing soccer now", "options": ["They are playing soccer now", "They is playing soccer now", "They playing soccer now"] },
+      { "tense": "future simple", "correct": "They will play soccer tomorrow", "options": ["They will play soccer tomorrow", "They will played soccer tomorrow", "They will playing soccer tomorrow"] }
+    ]
+  },
+  {
+    "id": 3,
+    "base": "He reads a book before bed",
+    "transformations": [
+      { "tense": "past simple", "correct": "He read a book before bed", "options": ["He read a book before bed", "He readed a book before bed", "He was read a book before bed"] },
+      { "tense": "present continuous", "correct": "He is reading a book now", "options": ["He is reading a book now", "He are reading a book now", "He reads a book now"] }
+    ]
+  },
+  {
+    "id": 4,
+    "base": "I eat breakfast at seven o'clock",
+    "transformations": [
+      { "tense": "past simple", "correct": "I ate breakfast at seven o'clock", "options": ["I ate breakfast at seven o'clock", "I eated breakfast at seven o'clock", "I was eat breakfast at seven o'clock"] },
+      { "tense": "present continuous", "correct": "I am eating breakfast now", "options": ["I am eating breakfast now", "I is eating breakfast now", "I eating breakfast now"] },
+      { "tense": "future simple", "correct": "I will eat breakfast at seven", "options": ["I will eat breakfast at seven", "I will ate breakfast at seven", "I will eating breakfast at seven"] }
+    ]
+  },
+  {
+    "id": 5,
+    "base": "The cat sleeps on the sofa",
+    "transformations": [
+      { "tense": "past simple", "correct": "The cat slept on the sofa", "options": ["The cat slept on the sofa", "The cat sleeped on the sofa", "The cat was sleep on the sofa"] },
+      { "tense": "present continuous", "correct": "The cat is sleeping on the sofa", "options": ["The cat is sleeping on the sofa", "The cat are sleeping on the sofa", "The cat sleeps on the sofa"] }
+    ]
+  },
+  {
+    "id": 6,
+    "base": "We go to the gym every morning",
+    "transformations": [
+      { "tense": "past simple", "correct": "We went to the gym every morning", "options": ["We went to the gym every morning", "We goed to the gym every morning", "We was go to the gym every morning"] },
+      { "tense": "present continuous", "correct": "We are going to the gym now", "options": ["We are going to the gym now", "We is going to the gym now", "We go to the gym now"] },
+      { "tense": "present perfect", "correct": "We have gone to the gym", "options": ["We have gone to the gym", "We have went to the gym", "We has gone to the gym"] }
+    ]
+  },
+  {
+    "id": 7,
+    "base": "My mother cooks dinner every evening",
+    "transformations": [
+      { "tense": "past simple", "correct": "My mother cooked dinner every evening", "options": ["My mother cooked dinner every evening", "My mother cook dinner every evening", "My mother was cook dinner every evening"] },
+      { "tense": "future simple", "correct": "My mother will cook dinner tomorrow", "options": ["My mother will cook dinner tomorrow", "My mother will cooked dinner tomorrow", "My mother will cooking dinner tomorrow"] }
+    ]
+  },
+  {
+    "id": 8,
+    "base": "The children play in the park",
+    "transformations": [
+      { "tense": "past simple", "correct": "The children played in the park", "options": ["The children played in the park", "The children playd in the park", "The children was play in the park"] },
+      { "tense": "present continuous", "correct": "The children are playing in the park", "options": ["The children are playing in the park", "The children is playing in the park", "The children playing in the park"] }
+    ]
+  },
+  {
+    "id": 9,
+    "base": "He drives his car to work",
+    "transformations": [
+      { "tense": "past simple", "correct": "He drove his car to work", "options": ["He drove his car to work", "He drived his car to work", "He was drive his car to work"] },
+      { "tense": "present continuous", "correct": "He is driving his car to work", "options": ["He is driving his car to work", "He are driving his car to work", "He drives his car to work"] }
+    ]
+  },
+  {
+    "id": 10,
+    "base": "I study English every Tuesday",
+    "transformations": [
+      { "tense": "past simple", "correct": "I studied English every Tuesday", "options": ["I studied English every Tuesday", "I studyed English every Tuesday", "I was study English every Tuesday"] },
+      { "tense": "present continuous", "correct": "I am studying English now", "options": ["I am studying English now", "I is studying English now", "I studying English now"] },
+      { "tense": "present perfect", "correct": "I have studied English today", "options": ["I have studied English today", "I have study English today", "I has studied English today"] }
+    ]
+  },
+  {
+    "id": 11,
+    "base": "She teaches math at the school",
+    "transformations": [
+      { "tense": "past simple", "correct": "She taught math at the school", "options": ["She taught math at the school", "She teached math at the school", "She was teach math at the school"] },
+      { "tense": "present continuous", "correct": "She is teaching math at the school", "options": ["She is teaching math at the school", "She are teaching math at the school", "She teaches math at the school"] }
+    ]
+  },
+  {
+    "id": 12,
+    "base": "They build a new house",
+    "transformations": [
+      { "tense": "past simple", "correct": "They built a new house", "options": ["They built a new house", "They builded a new house", "They was build a new house"] },
+      { "tense": "present continuous", "correct": "They are building a new house", "options": ["They are building a new house", "They is building a new house", "They build a new house"] },
+      { "tense": "present perfect", "correct": "They have built a new house", "options": ["They have built a new house", "They have builded a new house", "They has built a new house"] }
+    ]
+  },
+  {
+    "id": 13,
+    "base": "The dog runs in the garden",
+    "transformations": [
+      { "tense": "past simple", "correct": "The dog ran in the garden", "options": ["The dog ran in the garden", "The dog runned in the garden", "The dog was run in the garden"] },
+      { "tense": "present continuous", "correct": "The dog is running in the garden", "options": ["The dog is running in the garden", "The dog are running in the garden", "The dog runs in the garden"] }
+    ]
+  },
+  {
+    "id": 14,
+    "base": "We watch a movie on Fridays",
+    "transformations": [
+      { "tense": "past simple", "correct": "We watched a movie on Fridays", "options": ["We watched a movie on Fridays", "We watchd a movie on Fridays", "We was watch a movie on Fridays"] },
+      { "tense": "future simple", "correct": "We will watch a movie tonight", "options": ["We will watch a movie tonight", "We will watched a movie tonight", "We will watching a movie tonight"] }
+    ]
+  },
+  {
+    "id": 15,
+    "base": "He speaks three languages fluently",
+    "transformations": [
+      { "tense": "past simple", "correct": "He spoke three languages fluently", "options": ["He spoke three languages fluently", "He speaked three languages fluently", "He was speak three languages fluently"] },
+      { "tense": "present continuous", "correct": "He is speaking three languages", "options": ["He is speaking three languages", "He are speaking three languages", "He speaks three languages"] }
+    ]
+  },
+  {
+    "id": 16,
+    "base": "I take the bus to school",
+    "transformations": [
+      { "tense": "past simple", "correct": "I took the bus to school", "options": ["I took the bus to school", "I taked the bus to school", "I was take the bus to school"] },
+      { "tense": "present continuous", "correct": "I am taking the bus to school", "options": ["I am taking the bus to school", "I is taking the bus to school", "I taking the bus to school"] }
+    ]
+  },
+  {
+    "id": 17,
+    "base": "My father works in an office",
+    "transformations": [
+      { "tense": "past simple", "correct": "My father worked in an office", "options": ["My father worked in an office", "My father workd in an office", "My father was work in an office"] },
+      { "tense": "future simple", "correct": "My father will work in an office", "options": ["My father will work in an office", "My father will worked in an office", "My father will working in an office"] }
+    ]
+  },
+  {
+    "id": 18,
+    "base": "The birds sing in the trees",
+    "transformations": [
+      { "tense": "past simple", "correct": "The birds sang in the trees", "options": ["The birds sang in the trees", "The birds singed in the trees", "The birds was sing in the trees"] },
+      { "tense": "present continuous", "correct": "The birds are singing in the trees", "options": ["The birds are singing in the trees", "The birds is singing in the trees", "The birds singing in the trees"] }
+    ]
+  },
+  {
+    "id": 19,
+    "base": "We have a big house in the city",
+    "transformations": [
+      { "tense": "past simple", "correct": "We had a big house in the city", "options": ["We had a big house in the city", "We haved a big house in the city", "We was have a big house in the city"] },
+      { "tense": "future simple", "correct": "We will have a big house in the city", "options": ["We will have a big house in the city", "We will has a big house in the city", "We will having a big house in the city"] }
+    ]
+  },
+  {
+    "id": 20,
+    "base": "She makes coffee every morning",
+    "transformations": [
+      { "tense": "past simple", "correct": "She made coffee every morning", "options": ["She made coffee every morning", "She maked coffee every morning", "She was make coffee every morning"] },
+      { "tense": "present continuous", "correct": "She is making coffee now", "options": ["She is making coffee now", "She are making coffee now", "She makes coffee now"] },
+      { "tense": "present perfect", "correct": "She has made coffee", "options": ["She has made coffee", "She has maked coffee", "She have made coffee"] }
+    ]
+  },
+  {
+    "id": 21,
+    "base": "The students do their homework",
+    "transformations": [
+      { "tense": "past simple", "correct": "The students did their homework", "options": ["The students did their homework", "The students doed their homework", "The students was do their homework"] },
+      { "tense": "present continuous", "correct": "The students are doing their homework", "options": ["The students are doing their homework", "The students is doing their homework", "The students doing their homework"] }
+    ]
+  },
+  {
+    "id": 22,
+    "base": "I buy vegetables at the market",
+    "transformations": [
+      { "tense": "past simple", "correct": "I bought vegetables at the market", "options": ["I bought vegetables at the market", "I buyed vegetables at the market", "I was buy vegetables at the market"] },
+      { "tense": "future simple", "correct": "I will buy vegetables at the market", "options": ["I will buy vegetables at the market", "I will bought vegetables at the market", "I will buying vegetables at the market"] }
+    ]
+  },
+  {
+    "id": 23,
+    "base": "He puts the keys on the table",
+    "transformations": [
+      { "tense": "past simple", "correct": "He put the keys on the table", "options": ["He put the keys on the table", "He putted the keys on the table", "He was put the keys on the table"] },
+      { "tense": "present continuous", "correct": "He is putting the keys on the table", "options": ["He is putting the keys on the table", "He are putting the keys on the table", "He puts the keys on the table"] }
+    ]
+  },
+  {
+    "id": 24,
+    "base": "They sell fresh bread at the bakery",
+    "transformations": [
+      { "tense": "past simple", "correct": "They sold fresh bread at the bakery", "options": ["They sold fresh bread at the bakery", "They selled fresh bread at the bakery", "They was sell fresh bread at the bakery"] },
+      { "tense": "present continuous", "correct": "They are selling fresh bread at the bakery", "options": ["They are selling fresh bread at the bakery", "They is selling fresh bread at the bakery", "They sell fresh bread at the bakery"] }
+    ]
+  },
+  {
+    "id": 25,
+    "base": "She wears a red dress to the party",
+    "transformations": [
+      { "tense": "past simple", "correct": "She wore a red dress to the party", "options": ["She wore a red dress to the party", "She weared a red dress to the party", "She was wear a red dress to the party"] },
+      { "tense": "present continuous", "correct": "She is wearing a red dress now", "options": ["She is wearing a red dress now", "She are wearing a red dress now", "She wears a red dress now"] }
+    ]
+  },
+  {
+    "id": 26,
+    "base": "I feel happy today",
+    "transformations": [
+      { "tense": "past simple", "correct": "I felt happy yesterday", "options": ["I felt happy yesterday", "I feeled happy yesterday", "I was feel happy yesterday"] },
+      { "tense": "present continuous", "correct": "I am feeling happy today", "options": ["I am feeling happy today", "I is feeling happy today", "I feeling happy today"] }
+    ]
+  },
+  {
+    "id": 27,
+    "base": "The teacher gives us homework",
+    "transformations": [
+      { "tense": "past simple", "correct": "The teacher gave us homework", "options": ["The teacher gave us homework", "The teacher gived us homework", "The teacher was give us homework"] },
+      { "tense": "present continuous", "correct": "The teacher is giving us homework", "options": ["The teacher is giving us homework", "The teacher are giving us homework", "The teacher gives us homework"] }
+    ]
+  },
+  {
+    "id": 28,
+    "base": "We meet our friends at the cafe",
+    "transformations": [
+      { "tense": "past simple", "correct": "We met our friends at the cafe", "options": ["We met our friends at the cafe", "We meeted our friends at the cafe", "We was meet our friends at the cafe"] },
+      { "tense": "future simple", "correct": "We will meet our friends at the cafe", "options": ["We will meet our friends at the cafe", "We will met our friends at the cafe", "We will meeting our friends at the cafe"] }
+    ]
+  },
+  {
+    "id": 29,
+    "base": "He tells funny stories to the kids",
+    "transformations": [
+      { "tense": "past simple", "correct": "He told funny stories to the kids", "options": ["He told funny stories to the kids", "He telled funny stories to the kids", "He was tell funny stories to the kids"] },
+      { "tense": "present continuous", "correct": "He is telling funny stories to the kids", "options": ["He is telling funny stories to the kids", "He are telling funny stories to the kids", "He tells funny stories to the kids"] }
+    ]
+  },
+  {
+    "id": 30,
+    "base": "The sun shines brightly in summer",
+    "transformations": [
+      { "tense": "past simple", "correct": "The sun shone brightly in summer", "options": ["The sun shone brightly in summer", "The sun shined brightly in summer", "The sun was shine brightly in summer"] },
+      { "tense": "present continuous", "correct": "The sun is shining brightly now", "options": ["The sun is shining brightly now", "The sun are shining brightly now", "The sun shines brightly now"] }
+    ]
+  },
+  {
+    "id": 31,
+    "base": "I think about the problem carefully",
+    "transformations": [
+      { "tense": "past simple", "correct": "I thought about the problem carefully", "options": ["I thought about the problem carefully", "I thinked about the problem carefully", "I was think about the problem carefully"] },
+      { "tense": "present continuous", "correct": "I am thinking about the problem now", "options": ["I am thinking about the problem now", "I is thinking about the problem now", "I think about the problem now"] }
+    ]
+  },
+  {
+    "id": 32,
+    "base": "They leave the office at five",
+    "transformations": [
+      { "tense": "past simple", "correct": "They left the office at five", "options": ["They left the office at five", "They leaved the office at five", "They was leave the office at five"] },
+      { "tense": "present continuous", "correct": "They are leaving the office now", "options": ["They are leaving the office now", "They is leaving the office now", "They leave the office now"] }
+    ]
+  },
+  {
+    "id": 33,
+    "base": "She knows the answer to the question",
+    "transformations": [
+      { "tense": "past simple", "correct": "She knew the answer to the question", "options": ["She knew the answer to the question", "She knowed the answer to the question", "She was know the answer to the question"] },
+      { "tense": "present perfect", "correct": "She has known the answer", "options": ["She has known the answer", "She has knew the answer", "She have known the answer"] }
+    ]
+  },
+  {
+    "id": 34,
+    "base": "We bring snacks to the party",
+    "transformations": [
+      { "tense": "past simple", "correct": "We brought snacks to the party", "options": ["We brought snacks to the party", "We bringed snacks to the party", "We was bring snacks to the party"] },
+      { "tense": "future simple", "correct": "We will bring snacks to the party", "options": ["We will bring snacks to the party", "We will brought snacks to the party", "We will bringing snacks to the party"] }
+    ]
+  },
+  {
+    "id": 35,
+    "base": "The baby cries when she is hungry",
+    "transformations": [
+      { "tense": "past simple", "correct": "The baby cried when she was hungry", "options": ["The baby cried when she was hungry", "The baby cryed when she was hungry", "The baby was cry when she was hungry"] },
+      { "tense": "present continuous", "correct": "The baby is crying because she is hungry", "options": ["The baby is crying because she is hungry", "The baby are crying because she is hungry", "The baby cries because she is hungry"] }
+    ]
+  },
+  {
+    "id": 36,
+    "base": "I drink coffee every morning",
+    "transformations": [
+      { "tense": "past simple", "correct": "I drank coffee every morning", "options": ["I drank coffee every morning", "I drinked coffee every morning", "I was drink coffee every morning"] },
+      { "tense": "present continuous", "correct": "I am drinking coffee now", "options": ["I am drinking coffee now", "I is drinking coffee now", "I drinking coffee now"] },
+      { "tense": "present perfect", "correct": "I have drunk coffee today", "options": ["I have drunk coffee today", "I have drank coffee today", "I has drunk coffee today"] }
+    ]
+  },
+  {
+    "id": 37,
+    "base": "He begins his work at nine",
+    "transformations": [
+      { "tense": "past simple", "correct": "He began his work at nine", "options": ["He began his work at nine", "He beginned his work at nine", "He was begin his work at nine"] },
+      { "tense": "future simple", "correct": "He will begin his work at nine", "options": ["He will begin his work at nine", "He will began his work at nine", "He will beginning his work at nine"] }
+    ]
+  },
+  {
+    "id": 38,
+    "base": "They choose a new leader",
+    "transformations": [
+      { "tense": "past simple", "correct": "They chose a new leader", "options": ["They chose a new leader", "They choosed a new leader", "They was choose a new leader"] },
+      { "tense": "present continuous", "correct": "They are choosing a new leader", "options": ["They are choosing a new leader", "They is choosing a new leader", "They choose a new leader"] },
+      { "tense": "present perfect", "correct": "They have chosen a new leader", "options": ["They have chosen a new leader", "They have chose a new leader", "They has chosen a new leader"] }
+    ]
+  },
+  {
+    "id": 39,
+    "base": "She swims in the pool every Sunday",
+    "transformations": [
+      { "tense": "past simple", "correct": "She swam in the pool every Sunday", "options": ["She swam in the pool every Sunday", "She swimmed in the pool every Sunday", "She was swim in the pool every Sunday"] },
+      { "tense": "present continuous", "correct": "She is swimming in the pool now", "options": ["She is swimming in the pool now", "She are swimming in the pool now", "She swims in the pool now"] }
+    ]
+  },
+  {
+    "id": 40,
+    "base": "My brother catches the ball easily",
+    "transformations": [
+      { "tense": "past simple", "correct": "My brother caught the ball easily", "options": ["My brother caught the ball easily", "My brother catched the ball easily", "My brother was catch the ball easily"] },
+      { "tense": "future simple", "correct": "My brother will catch the ball easily", "options": ["My brother will catch the ball easily", "My brother will caught the ball easily", "My brother will catching the ball easily"] }
+    ]
+  },
+  {
+    "id": 41,
+    "base": "I forget my keys at home sometimes",
+    "transformations": [
+      { "tense": "past simple", "correct": "I forgot my keys at home", "options": ["I forgot my keys at home", "I forgetted my keys at home", "I was forget my keys at home"] },
+      { "tense": "present perfect", "correct": "I have forgotten my keys at home", "options": ["I have forgotten my keys at home", "I have forgot my keys at home", "I has forgotten my keys at home"] }
+    ]
+  },
+  {
+    "id": 42,
+    "base": "The wind blows strongly at night",
+    "transformations": [
+      { "tense": "past simple", "correct": "The wind blew strongly at night", "options": ["The wind blew strongly at night", "The wind blowed strongly at night", "The wind was blow strongly at night"] },
+      { "tense": "present continuous", "correct": "The wind is blowing strongly now", "options": ["The wind is blowing strongly now", "The wind are blowing strongly now", "The wind blows strongly now"] }
+    ]
+  },
+  {
+    "id": 43,
+    "base": "They grow vegetables in their garden",
+    "transformations": [
+      { "tense": "past simple", "correct": "They grew vegetables in their garden", "options": ["They grew vegetables in their garden", "They growed vegetables in their garden", "They was grow vegetables in their garden"] },
+      { "tense": "present continuous", "correct": "They are growing vegetables in their garden", "options": ["They are growing vegetables in their garden", "They is growing vegetables in their garden", "They grow vegetables in their garden"] }
+    ]
+  },
+  {
+    "id": 44,
+    "base": "He hides his toys under the bed",
+    "transformations": [
+      { "tense": "past simple", "correct": "He hid his toys under the bed", "options": ["He hid his toys under the bed", "He hided his toys under the bed", "He was hide his toys under the bed"] },
+      { "tense": "present continuous", "correct": "He is hiding his toys under the bed", "options": ["He is hiding his toys under the bed", "He are hiding his toys under the bed", "He hides his toys under the bed"] }
+    ]
+  },
+  {
+    "id": 45,
+    "base": "I keep my old photographs in a box",
+    "transformations": [
+      { "tense": "past simple", "correct": "I kept my old photographs in a box", "options": ["I kept my old photographs in a box", "I keeped my old photographs in a box", "I was keep my old photographs in a box"] },
+      { "tense": "future simple", "correct": "I will keep my old photographs in a box", "options": ["I will keep my old photographs in a box", "I will kept my old photographs in a box", "I will keeping my old photographs in a box"] }
+    ]
+  },
+  {
+    "id": 46,
+    "base": "She leads the team with confidence",
+    "transformations": [
+      { "tense": "past simple", "correct": "She led the team with confidence", "options": ["She led the team with confidence", "She leaded the team with confidence", "She was lead the team with confidence"] },
+      { "tense": "present continuous", "correct": "She is leading the team with confidence", "options": ["She is leading the team with confidence", "She are leading the team with confidence", "She leads the team with confidence"] }
+    ]
+  },
+  {
+    "id": 47,
+    "base": "The plane flies over the mountains",
+    "transformations": [
+      { "tense": "past simple", "correct": "The plane flew over the mountains", "options": ["The plane flew over the mountains", "The plan flyed over the mountains", "The plane was fly over the mountains"] },
+      { "tense": "present continuous", "correct": "The plane is flying over the mountains", "options": ["The plane is flying over the mountains", "The plane are flying over the mountains", "The plane flies over the mountains"] }
+    ]
+  },
+  {
+    "id": 48,
+    "base": "We pay the bill at the end of the meal",
+    "transformations": [
+      { "tense": "past simple", "correct": "We paid the bill at the end of the meal", "options": ["We paid the bill at the end of the meal", "We payed the bill at the end of the meal", "We was pay the bill at the end of the meal"] },
+      { "tense": "future simple", "correct": "We will pay the bill at the end of the meal", "options": ["We will pay the bill at the end of the meal", "We will paid the bill at the end of the meal", "We will paying the bill at the end of the meal"] }
+    ]
+  },
+  {
+    "id": 49,
+    "base": "He rides his bicycle to school",
+    "transformations": [
+      { "tense": "past simple", "correct": "He rode his bicycle to school", "options": ["He rode his bicycle to school", "He rided his bicycle to school", "He was ride his bicycle to school"] },
+      { "tense": "present continuous", "correct": "He is riding his bicycle to school", "options": ["He is riding his bicycle to school", "He are riding his bicycle to school", "He rides his bicycle to school"] }
+    ]
+  },
+  {
+    "id": 50,
+    "base": "She rings the bell when class ends",
+    "transformations": [
+      { "tense": "past simple", "correct": "She rang the bell when class ended", "options": ["She rang the bell when class ended", "She ringed the bell when class ended", "She was ring the bell when class ended"] },
+      { "tense": "present perfect", "correct": "She has rung the bell", "options": ["She has rung the bell", "She has rang the bell", "She have rung the bell"] }
+    ]
+  },
+  {
+    "id": 51,
+    "base": "I send an email to my boss every week",
+    "transformations": [
+      { "tense": "past simple", "correct": "I sent an email to my boss every week", "options": ["I sent an email to my boss every week", "I sendded an email to my boss every week", "I was send an email to my boss every week"] },
+      { "tense": "present continuous", "correct": "I am sending an email to my boss now", "options": ["I am sending an email to my boss now", "I is sending an email to my boss now", "I send an email to my boss now"] }
+    ]
+  },
+  {
+    "id": 52,
+    "base": "The company shows a new product every year",
+    "transformations": [
+      { "tense": "past simple", "correct": "The company showed a new product every year", "options": ["The company showed a new product every year", "The company shew a new product every year", "The company was show a new product every year"] },
+      { "tense": "present continuous", "correct": "The company is showing a new product now", "options": ["The company is showing a new product now", "The company are showing a new product now", "The company shows a new product now"] }
+    ]
+  },
+  {
+    "id": 53,
+    "base": "They sit in the garden every afternoon",
+    "transformations": [
+      { "tense": "past simple", "correct": "They sat in the garden every afternoon", "options": ["They sat in the garden every afternoon", "They sitted in the garden every afternoon", "They was sit in the garden every afternoon"] },
+      { "tense": "present continuous", "correct": "They are sitting in the garden now", "options": ["They are sitting in the garden now", "They is sitting in the garden now", "They sit in the garden now"] }
+    ]
+  },
+  {
+    "id": 54,
+    "base": "He spends a lot of money on clothes",
+    "transformations": [
+      { "tense": "past simple", "correct": "He spent a lot of money on clothes", "options": ["He spent a lot of money on clothes", "He spendded a lot of money on clothes", "He was spend a lot of money on clothes"] },
+      { "tense": "present perfect", "correct": "He has spent a lot of money on clothes", "options": ["He has spent a lot of money on clothes", "He has spend a lot of money on clothes", "He have spent a lot of money on clothes"] }
+    ]
+  },
+  {
+    "id": 55,
+    "base": "I stand at the bus stop every morning",
+    "transformations": [
+      { "tense": "past simple", "correct": "I stood at the bus stop every morning", "options": ["I stood at the bus stop every morning", "I standed at the bus stop every morning", "I was stand at the bus stop every morning"] },
+      { "tense": "present continuous", "correct": "I am standing at the bus stop now", "options": ["I am standing at the bus stop now", "I is standing at the bus stop now", "I stand at the bus stop now"] }
+    ]
+  },
+  {
+    "id": 56,
+    "base": "She sticks the photos in her album",
+    "transformations": [
+      { "tense": "past simple", "correct": "She stuck the photos in her album", "options": ["She stuck the photos in her album", "She sticked the photos in her album", "She was stick the photos in her album"] },
+      { "tense": "present continuous", "correct": "She is sticking the photos in her album", "options": ["She is sticking the photos in her album", "She are sticking the photos in her album", "She sticks the photos in her album"] }
+    ]
+  },
+  {
+    "id": 57,
+    "base": "We strike a deal with the client",
+    "transformations": [
+      { "tense": "past simple", "correct": "We struck a deal with the client", "options": ["We struck a deal with the client", "We striked a deal with the client", "We was strike a deal with the client"] },
+      { "tense": "present continuous", "correct": "We are striking a deal with the client", "options": ["We are striking a deal with the client", "We is striking a deal with the client", "We strike a deal with the client"] }
+    ]
+  },
+  {
+    "id": 58,
+    "base": "He throws the ball to his dog",
+    "transformations": [
+      { "tense": "past simple", "correct": "He threw the ball to his dog", "options": ["He threw the ball to his dog", "He throwed the ball to his dog", "He was throw the ball to his dog"] },
+      { "tense": "present perfect", "correct": "He has thrown the ball to his dog", "options": ["He has thrown the ball to his dog", "He has threw the ball to his dog", "He have thrown the ball to his dog"] }
+    ]
+  },
+  {
+    "id": 59,
+    "base": "I understand the lesson very well",
+    "transformations": [
+      { "tense": "past simple", "correct": "I understood the lesson very well", "options": ["I understood the lesson very well", "I understanded the lesson very well", "I was understand the lesson very well"] },
+      { "tense": "present continuous", "correct": "I am understanding the lesson now", "options": ["I am understanding the lesson now", "I is understanding the lesson now", "I understand the lesson now"] }
+    ]
+  },
+  {
+    "id": 60,
+    "base": "She wins the race every year",
+    "transformations": [
+      { "tense": "past simple", "correct": "She won the race every year", "options": ["She won the race every year", "She win the race every year", "She was win the race every year"] },
+      { "tense": "future simple", "correct": "She will win the race next year", "options": ["She will win the race next year", "She will won the race next year", "She will winning the race next year"] }
+    ]
+  },
+  {
+    "id": 61,
+    "base": "They teach English at the language school",
+    "transformations": [
+      { "tense": "past simple", "correct": "They taught English at the language school", "options": ["They taught English at the language school", "They teached English at the language school", "They was teach English at the language school"] },
+      { "tense": "present continuous", "correct": "They are teaching English at the language school", "options": ["They are teaching English at the language school", "They is teaching English at the language school", "They teach English at the language school"] }
+    ]
+  },
+  {
+    "id": 62,
+    "base": "I wake up at six every weekday",
+    "transformations": [
+      { "tense": "past simple", "correct": "I woke up at six every weekday", "options": ["I woke up at six every weekday", "I waked up at six every weekday", "I was wake up at six every weekday"] },
+      { "tense": "present continuous", "correct": "I am waking up at six now", "options": ["I am waking up at six now", "I is waking up at six now", "I wake up at six now"] }
+    ]
+  },
+  {
+    "id": 63,
+    "base": "He writes poems about nature",
+    "transformations": [
+      { "tense": "past simple", "correct": "He wrote poems about nature", "options": ["He wrote poems about nature", "He writed poems about nature", "He was write poems about nature"] },
+      { "tense": "present continuous", "correct": "He is writing poems about nature", "options": ["He is writing poems about nature", "He are writing poems about nature", "He writes poems about nature"] },
+      { "tense": "present perfect", "correct": "He has written poems about nature", "options": ["He has written poems about nature", "He has wrote poems about nature", "He have written poems about nature"] }
+    ]
+  },
+  {
+    "id": 64,
+    "base": "The restaurant serves dinner at seven",
+    "transformations": [
+      { "tense": "past simple", "correct": "The restaurant served dinner at seven", "options": ["The restaurant served dinner at seven", "The restaurant servd dinner at seven", "The restaurant was serve dinner at seven"] },
+      { "tense": "future simple", "correct": "The restaurant will serve dinner at seven", "options": ["The restaurant will serve dinner at seven", "The restaurant will served dinner at seven", "The restaurant will serving dinner at seven"] }
+    ]
+  },
+  {
+    "id": 65,
+    "base": "I fall asleep while watching TV",
+    "transformations": [
+      { "tense": "past simple", "correct": "I fell asleep while watching TV", "options": ["I fell asleep while watching TV", "I falled asleep while watching TV", "I was fall asleep while watching TV"] },
+      { "tense": "present continuous", "correct": "I am falling asleep while watching TV", "options": ["I am falling asleep while watching TV", "I is falling asleep while watching TV", "I fall asleep while watching TV"] }
+    ]
+  },
+  {
+    "id": 66,
+    "base": "She feeds her cat twice a day",
+    "transformations": [
+      { "tense": "past simple", "correct": "She fed her cat twice a day", "options": ["She fed her cat twice a day", "She feeded her cat twice a day", "She was feed her cat twice a day"] },
+      { "tense": "present continuous", "correct": "She is feeding her cat now", "options": ["She is feeding her cat now", "She are feeding her cat now", "She feeds her cat now"] }
+    ]
+  },
+  {
+    "id": 67,
+    "base": "We fight for our rights peacefully",
+    "transformations": [
+      { "tense": "past simple", "correct": "We fought for our rights peacefully", "options": ["We fought for our rights peacefully", "We fighted for our rights peacefully", "We was fight for our rights peacefully"] },
+      { "tense": "present continuous", "correct": "We are fighting for our rights peacefully", "options": ["We are fighting for our rights peacefully", "We is fighting for our rights peacefully", "We fight for our rights peacefully"] }
+    ]
+  },
+  {
+    "id": 68,
+    "base": "I find interesting books at the library",
+    "transformations": [
+      { "tense": "past simple", "correct": "I found interesting books at the library", "options": ["I found interesting books at the library", "I finded interesting books at the library", "I was find interesting books at the library"] },
+      { "tense": "present perfect", "correct": "I have found interesting books at the library", "options": ["I have found interesting books at the library", "I have find interesting books at the library", "I has found interesting books at the library"] }
+    ]
+  },
+  {
+    "id": 69,
+    "base": "He hangs his coat on the hook",
+    "transformations": [
+      { "tense": "past simple", "correct": "He hung his coat on the hook", "options": ["He hung his coat on the hook", "He hanged his coat on the hook", "He was hang his coat on the hook"] },
+      { "tense": "present continuous", "correct": "He is hanging his coat on the hook", "options": ["He is hanging his coat on the hook", "He are hanging his coat on the hook", "He hangs his coat on the hook"] }
+    ]
+  },
+  {
+    "id": 70,
+    "base": "They hold a meeting every Monday",
+    "transformations": [
+      { "tense": "past simple", "correct": "They held a meeting every Monday", "options": ["They held a meeting every Monday", "They holded a meeting every Monday", "They was hold a meeting every Monday"] },
+      { "tense": "present continuous", "correct": "They are holding a meeting now", "options": ["They are holding a meeting now", "They is holding a meeting now", "They hold a meeting now"] },
+      { "tense": "future simple", "correct": "They will hold a meeting on Monday", "options": ["They will hold a meeting on Monday", "They will held a meeting on Monday", "They will holding a meeting on Monday"] }
+    ]
+  },
+  {
+    "id": 71,
+    "base": "I lend my books to my classmates",
+    "transformations": [
+      { "tense": "past simple", "correct": "I lent my books to my classmates", "options": ["I lent my books to my classmates", "I lended my books to my classmates", "I was lend my books to my classmates"] },
+      { "tense": "present continuous", "correct": "I am lending my books to my classmates", "options": ["I am lending my books to my classmates", "I is lending my books to my classmates", "I lend my books to my classmates"] }
+    ]
+  },
+  {
+    "id": 72,
+    "base": "She lights a candle every evening",
+    "transformations": [
+      { "tense": "past simple", "correct": "She lit a candle every evening", "options": ["She lit a candle every evening", "She lighted a candle every evening", "She was light a candle every evening"] },
+      { "tense": "present continuous", "correct": "She is lighting a candle now", "options": ["She is lighting a candle now", "She are lighting a candle now", "She lights a candle now"] }
+    ]
+  },
+  {
+    "id": 73,
+    "base": "We lose our keys from time to time",
+    "transformations": [
+      { "tense": "past simple", "correct": "We lost our keys from time to time", "options": ["We lost our keys from time to time", "We losed our keys from time to time", "We was lose our keys from time to time"] },
+      { "tense": "present perfect", "correct": "We have lost our keys", "options": ["We have lost our keys", "We have lose our keys", "We has lost our keys"] }
+    ]
+  },
+  {
+    "id": 74,
+    "base": "He means what he says",
+    "transformations": [
+      { "tense": "past simple", "correct": "He meant what he said", "options": ["He meant what he said", "He meaned what he said", "He was mean what he said"] },
+      { "tense": "present perfect", "correct": "He has meant what he said", "options": ["He has meant what he said", "He has mean what he said", "He have meant what he said"] }
+    ]
+  },
+  {
+    "id": 75,
+    "base": "I shut the window when it rains",
+    "transformations": [
+      { "tense": "past simple", "correct": "I shut the window when it rained", "options": ["I shut the window when it rained", "I shuted the window when it rained", "I was shut the window when it rained"] },
+      { "tense": "present continuous", "correct": "I am shutting the window because it is raining", "options": ["I am shutting the window because it is raining", "I is shutting the window because it is raining", "I shut the window because it is raining"] }
+    ]
+  },
+  {
+    "id": 76,
+    "base": "She sings in the church choir",
+    "transformations": [
+      { "tense": "past simple", "correct": "She sang in the church choir", "options": ["She sang in the church choir", "She singed in the church choir", "She was sing in the church choir"] },
+      { "tense": "present continuous", "correct": "She is singing in the church choir", "options": ["She is singing in the church choir", "She are singing in the church choir", "She sings in the church choir"] }
+    ]
+  },
+  {
+    "id": 77,
+    "base": "They sink the ship in the deep ocean",
+    "transformations": [
+      { "tense": "past simple", "correct": "They sank the ship in the deep ocean", "options": ["They sank the ship in the deep ocean", "They sinkd the ship in the deep ocean", "They was sink the ship in the deep ocean"] },
+      { "tense": "present continuous", "correct": "They are sinking the ship in the deep ocean", "options": ["They are sinking the ship in the deep ocean", "They is sinking the ship in the deep ocean", "They sink the ship in the deep ocean"] }
+    ]
+  },
+  {
+    "id": 78,
+    "base": "I slide down the hill on my sled",
+    "transformations": [
+      { "tense": "past simple", "correct": "I slid down the hill on my sled", "options": ["I slid down the hill on my sled", "I slided down the hill on my sled", "I was slide down the hill on my sled"] },
+      { "tense": "present continuous", "correct": "I am sliding down the hill on my sled", "options": ["I am sliding down the hill on my sled", "I is sliding down the hill on my sled", "I slide down the hill on my sled"] }
+    ]
+  },
+  {
+    "id": 79,
+    "base": "He speaks to the audience with passion",
+    "transformations": [
+      { "tense": "past simple", "correct": "He spoke to the audience with passion", "options": ["He spoke to the audience with passion", "He speaked to the audience with passion", "He was speak to the audience with passion"] },
+      { "tense": "present continuous", "correct": "He is speaking to the audience with passion", "options": ["He is speaking to the audience with passion", "He are speaking to the audience with passion", "He speaks to the audience with passion"] }
+    ]
+  },
+  {
+    "id": 80,
+    "base": "The river flows through the valley",
+    "transformations": [
+      { "tense": "past simple", "correct": "The river flowed through the valley", "options": ["The river flowed through the valley", "The river flew through the valley", "The river was flow through the valley"] },
+      { "tense": "present continuous", "correct": "The river is flowing through the valley", "options": ["The river is flowing through the valley", "The river are flowing through the valley", "The river flows through the valley"] }
+    ]
+  },
+  {
+    "id": 81,
+    "base": "We raise our hands in class",
+    "transformations": [
+      { "tense": "past simple", "correct": "We raised our hands in class", "options": ["We raised our hands in class", "We raisd our hands in class", "We was raise our hands in class"] },
+      { "tense": "present continuous", "correct": "We are raising our hands in class", "options": ["We are raising our hands in class", "We is raising our hands in class", "We raise our hands in class"] }
+    ]
+  },
+  {
+    "id": 82,
+    "base": "She reaches the station before the train",
+    "transformations": [
+      { "tense": "past simple", "correct": "She reached the station before the train", "options": ["She reached the station before the train", "She reachd the station before the train", "She was reach the station before the train"] },
+      { "tense": "future simple", "correct": "She will reach the station before the train", "options": ["She will reach the station before the train", "She will reached the station before the train", "She will reaching the station before the train"] }
+    ]
+  },
+  {
+    "id": 83,
+    "base": "I trust my best friend completely",
+    "transformations": [
+      { "tense": "past simple", "correct": "I trusted my best friend completely", "options": ["I trusted my best friend completely", "I trustd my best friend completely", "I was trust my best friend completely"] },
+      { "tense": "present perfect", "correct": "I have trusted my best friend completely", "options": ["I have trusted my best friend completely", "I have trust my best friend completely", "I has trusted my best friend completely"] }
+    ]
+  },
+  {
+    "id": 84,
+    "base": "The flowers bloom in spring",
+    "transformations": [
+      { "tense": "past simple", "correct": "The flowers bloomed in spring", "options": ["The flowers bloomed in spring", "The flowers blum in spring", "The flowers was bloom in spring"] },
+      { "tense": "present continuous", "correct": "The flowers are blooming now", "options": ["The flowers are blooming now", "The flowers is blooming now", "The flowers bloom now"] }
+    ]
+  },
+  {
+    "id": 85,
+    "base": "He fixes his car on the weekends",
+    "transformations": [
+      { "tense": "past simple", "correct": "He fixed his car on the weekends", "options": ["He fixed his car on the weekends", "He fix his car on the weekends", "He was fix his car on the weekends"] },
+      { "tense": "present continuous", "correct": "He is fixing his car now", "options": ["He is fixing his car now", "He are fixing his car now", "He fixes his car now"] }
+    ]
+  },
+  {
+    "id": 86,
+    "base": "They enjoy the concert very much",
+    "transformations": [
+      { "tense": "past simple", "correct": "They enjoyed the concert very much", "options": ["They enjoyed the concert very much", "They enjoyd the concert very much", "They was enjoy the concert very much"] },
+      { "tense": "present continuous", "correct": "They are enjoying the concert now", "options": ["They are enjoying the concert now", "They is enjoying the concert now", "They enjoy the concert now"] }
+    ]
+  },
+  {
+    "id": 87,
+    "base": "She dresses her daughter in warm clothes",
+    "transformations": [
+      { "tense": "past simple", "correct": "She dressed her daughter in warm clothes", "options": ["She dressed her daughter in warm clothes", "She drest her daughter in warm clothes", "She was dress her daughter in warm clothes"] },
+      { "tense": "present continuous", "correct": "She is dressing her daughter in warm clothes", "options": ["She is dressing her daughter in warm clothes", "She are dressing her daughter in warm clothes", "She dresses her daughter in warm clothes"] }
+    ]
+  },
+  {
+    "id": 88,
+    "base": "I finish my work before dinner",
+    "transformations": [
+      { "tense": "past simple", "correct": "I finished my work before dinner", "options": ["I finished my work before dinner", "I finishd my work before dinner", "I was finish my work before dinner"] },
+      { "tense": "future simple", "correct": "I will finish my work before dinner", "options": ["I will finish my work before dinner", "I will finished my work before dinner", "I will finishing my work before dinner"] }
+    ]
+  },
+  {
+    "id": 89,
+    "base": "The train arrives at platform three",
+    "transformations": [
+      { "tense": "past simple", "correct": "The train arrived at platform three", "options": ["The train arrived at platform three", "The train arrives at platform three", "The train was arrive at platform three"] },
+      { "tense": "present continuous", "correct": "The train is arriving at platform three", "options": ["The train is arriving at platform three", "The train are arriving at platform three", "The train arrives at platform three"] }
+    ]
+  },
+  {
+    "id": 90,
+    "base": "We change our plans when necessary",
+    "transformations": [
+      { "tense": "past simple", "correct": "We changed our plans when necessary", "options": ["We changed our plans when necessary", "We changd our plans when necessary", "We was change our plans when necessary"] },
+      { "tense": "present perfect", "correct": "We have changed our plans", "options": ["We have changed our plans", "We have change our plans", "We has changed our plans"] }
+    ]
+  },
+  {
+    "id": 91,
+    "base": "He climbs the mountain every summer",
+    "transformations": [
+      { "tense": "past simple", "correct": "He climbed the mountain every summer", "options": ["He climbed the mountain every summer", "He climbd the mountain every summer", "He was climb the mountain every summer"] },
+      { "tense": "present continuous", "correct": "He is climbing the mountain now", "options": ["He is climbing the mountain now", "He are climbing the mountain now", "He climbs the mountain now"] }
+    ]
+  },
+  {
+    "id": 92,
+    "base": "I clean my room every Saturday",
+    "transformations": [
+      { "tense": "past simple", "correct": "I cleaned my room every Saturday", "options": ["I cleaned my room every Saturday", "I cleand my room every Saturday", "I was clean my room every Saturday"] },
+      { "tense": "future simple", "correct": "I will clean my room next Saturday", "options": ["I will clean my room next Saturday", "I will cleaned my room next Saturday", "I will cleaning my room next Saturday"] }
+    ]
+  },
+  {
+    "id": 93,
+    "base": "She dances at the school festival",
+    "transformations": [
+      { "tense": "past simple", "correct": "She danced at the school festival", "options": ["She danced at the school festival", "She dancd at the school festival", "She was dance at the school festival"] },
+      { "tense": "present continuous", "correct": "She is dancing at the school festival", "options": ["She is dancing at the school festival", "She are dancing at the school festival", "She dances at the school festival"] }
+    ]
+  },
+  {
+    "id": 94,
+    "base": "They help their neighbors with groceries",
+    "transformations": [
+      { "tense": "past simple", "correct": "They helped their neighbors with groceries", "options": ["They helped their neighbors with groceries", "They helpd their neighbors with groceries", "They was help their neighbors with groceries"] },
+      { "tense": "present continuous", "correct": "They are helping their neighbors with groceries", "options": ["They are helping their neighbors with groceries", "They is helping their neighbors with groceries", "They help their neighbors with groceries"] }
+    ]
+  },
+  {
+    "id": 95,
+    "base": "I learn something new every day",
+    "transformations": [
+      { "tense": "past simple", "correct": "I learned something new every day", "options": ["I learned something new every day", "I learnd something new every day", "I was learn something new every day"] },
+      { "tense": "present perfect", "correct": "I have learned something new today", "options": ["I have learned something new today", "I have learn something new today", "I has learned something new today"] }
+    ]
+  },
+  {
+    "id": 96,
+    "base": "The shop opens at nine in the morning",
+    "transformations": [
+      { "tense": "past simple", "correct": "The shop opened at nine in the morning", "options": ["The shop opened at nine in the morning", "The shop opend at nine in the morning", "The shop was open at nine in the morning"] },
+      { "tense": "future simple", "correct": "The shop will open at nine tomorrow", "options": ["The shop will open at nine tomorrow", "The shop will opened at nine tomorrow", "The shop will opening at nine tomorrow"] }
+    ]
+  },
+  {
+    "id": 97,
+    "base": "She paints beautiful pictures of nature",
+    "transformations": [
+      { "tense": "past simple", "correct": "She painted beautiful pictures of nature", "options": ["She painted beautiful pictures of nature", "She paint beautiful pictures of nature", "She was paint beautiful pictures of nature"] },
+      { "tense": "present continuous", "correct": "She is painting beautiful pictures of nature", "options": ["She is painting beautiful pictures of nature", "She are painting beautiful pictures of nature", "She paints beautiful pictures of nature"] }
+    ]
+  },
+  {
+    "id": 98,
+    "base": "They save money for their vacation",
+    "transformations": [
+      { "tense": "past simple", "correct": "They saved money for their vacation", "options": ["They saved money for their vacation", "They savd money for their vacation", "They was save money for their vacation"] },
+      { "tense": "present continuous", "correct": "They are saving money for their vacation", "options": ["They are saving money for their vacation", "They is saving money for their vacation", "They save money for their vacation"] }
+    ]
+  },
+  {
+    "id": 99,
+    "base": "I visit my grandmother every weekend",
+    "transformations": [
+      { "tense": "past simple", "correct": "I visited my grandmother every weekend", "options": ["I visited my grandmother every weekend", "I visitd my grandmother every weekend", "I was visit my grandmother every weekend"] },
+      { "tense": "future simple", "correct": "I will visit my grandmother next weekend", "options": ["I will visit my grandmother next weekend", "I will visited my grandmother next weekend", "I will visiting my grandmother next weekend"] }
+    ]
+  },
+  {
+    "id": 100,
+    "base": "We walk in the park every evening",
+    "transformations": [
+      { "tense": "past simple", "correct": "We walked in the park every evening", "options": ["We walked in the park every evening", "We walkd in the park every evening", "We was walk in the park every evening"] },
+      { "tense": "present continuous", "correct": "We are walking in the park now", "options": ["We are walking in the park now", "We is walking in the park now", "We walk in the park now"] },
+      { "tense": "present perfect", "correct": "We have walked in the park", "options": ["We have walked in the park", "We have walk in the park", "We has walked in the park"] }
+    ]
+  }
+]

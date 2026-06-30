@@ -1,0 +1,322 @@
+[
+  {
+    "definition": "To awaken or get out of bed.",
+    "forms": [
+      { "tense": "Present", "answer": "wake up" },
+      { "tense": "Past", "answer": "woke up" },
+      { "tense": "Past Participle", "answer": "woken up" }
+    ]
+  },
+  {
+    "definition": "To stop (a machine, light, etc.) from working.",
+    "forms": [
+      { "tense": "Present", "answer": "turn off" },
+      { "tense": "Past", "answer": "turned off" },
+      { "tense": "Past Participle", "answer": "turned off" }
+    ]
+  },
+  {
+    "definition": "To start (a machine, light, etc.) working.",
+    "forms": [
+      { "tense": "Present", "answer": "turn on" },
+      { "tense": "Past", "answer": "turned on" },
+      { "tense": "Past Participle", "answer": "turned on" }
+    ]
+  },
+  {
+    "definition": "To discover or find something by chance.",
+    "forms": [
+      { "tense": "Present", "answer": "come across" },
+      { "tense": "Past", "answer": "came across" },
+      { "tense": "Past Participle", "answer": "come across" }
+    ]
+  },
+  {
+    "definition": "To continue doing something.",
+    "forms": [
+      { "tense": "Present", "answer": "carry on" },
+      { "tense": "Past", "answer": "carried on" },
+      { "tense": "Past Participle", "answer": "carried on" }
+    ]
+  },
+  {
+    "definition": "To arrive or appear somewhere.",
+    "forms": [
+      { "tense": "Present", "answer": "show up" },
+      { "tense": "Past", "answer": "showed up" },
+      { "tense": "Past Participle", "answer": "shown up" }
+    ]
+  },
+  {
+    "definition": "To remove something (clothing, etc.) from your body.",
+    "forms": [
+      { "tense": "Present", "answer": "take off" },
+      { "tense": "Past", "answer": "took off" },
+      { "tense": "Past Participle", "answer": "taken off" }
+    ]
+  },
+  {
+    "definition": "To put something (clothing, etc.) on your body.",
+    "forms": [
+      { "tense": "Present", "answer": "put on" },
+      { "tense": "Past", "answer": "put on" },
+      { "tense": "Past Participle", "answer": "put on" }
+    ]
+  },
+  {
+    "definition": "To investigate or examine something.",
+    "forms": [
+      { "tense": "Present", "answer": "look into" },
+      { "tense": "Past", "answer": "looked into" },
+      { "tense": "Past Participle", "answer": "looked into" }
+    ]
+  },
+  {
+    "definition": "To extinguish a fire or stop something from burning.",
+    "forms": [
+      { "tense": "Present", "answer": "put out" },
+      { "tense": "Past", "answer": "put out" },
+      { "tense": "Past Participle", "answer": "put out" }
+    ]
+  },
+  {
+    "definition": "To cancel or postpone something.",
+    "forms": [
+      { "tense": "Present", "answer": "call off" },
+      { "tense": "Past", "answer": "called off" },
+      { "tense": "Past Participle", "answer": "called off" }
+    ]
+  },
+  {
+    "definition": "To return something to its owner.",
+    "forms": [
+      { "tense": "Present", "answer": "give back" },
+      { "tense": "Past", "answer": "gave back" },
+      { "tense": "Past Participle", "answer": "given back" }
+    ]
+  },
+  {
+    "definition": "To exit a vehicle, bus, train, etc.",
+    "forms": [
+      { "tense": "Present", "answer": "get off" },
+      { "tense": "Past", "answer": "got off" },
+      { "tense": "Past Participle", "answer": "gotten off" }
+    ]
+  },
+  {
+    "definition": "To enter a vehicle, bus, train, etc.",
+    "forms": [
+      { "tense": "Present", "answer": "get on" },
+      { "tense": "Past", "answer": "got on" },
+      { "tense": "Past Participle", "answer": "gotten on" }
+    ]
+  },
+  {
+    "definition": "To tolerate or endure something.",
+    "forms": [
+      { "tense": "Present", "answer": "put up with" },
+      { "tense": "Past", "answer": "put up with" },
+      { "tense": "Past Participle", "answer": "put up with" }
+    ]
+  },
+  {
+    "definition": "To complete a form or document with necessary information.",
+    "forms": [
+      { "tense": "Present", "answer": "fill out" },
+      { "tense": "Past", "answer": "filled out" },
+      { "tense": "Past Participle", "answer": "filled out" }
+    ]
+  },
+  {
+    "definition": "To separate into pieces or break.",
+    "forms": [
+      { "tense": "Present", "answer": "break down" },
+      { "tense": "Past", "answer": "broke down" },
+      { "tense": "Past Participle", "answer": "broken down" }
+    ]
+  },
+  {
+    "definition": "To produce or create something, especially sound, music, etc.",
+    "forms": [
+      { "tense": "Present", "answer": "give off" },
+      { "tense": "Past", "answer": "gave off" },
+      { "tense": "Past Participle", "answer": "given off" }
+    ]
+  },
+  {
+    "definition": "To search for information in a reference source.",
+    "forms": [
+      { "tense": "Present", "answer": "look up" },
+      { "tense": "Past", "answer": "looked up" },
+      { "tense": "Past Participle", "answer": "looked up" }
+    ]
+  },
+  {
+    "definition": "To be careful or watchful about something.",
+    "forms": [
+      { "tense": "Present", "answer": "watch out" },
+      { "tense": "Past", "answer": "watched out" },
+      { "tense": "Past Participle", "answer": "watched out" }
+    ]
+  },
+  {
+    "definition": "To reduce the volume or intensity of something.",
+    "forms": [
+      { "tense": "Present", "answer": "turn down" },
+      { "tense": "Past", "answer": "turned down" },
+      { "tense": "Past Participle", "answer": "turned down" }
+    ]
+  },
+  {
+    "definition": "To increase the volume or intensity of something.",
+    "forms": [
+      { "tense": "Present", "answer": "turn up" },
+      { "tense": "Past", "answer": "turned up" },
+      { "tense": "Past Participle", "answer": "turned up" }
+    ]
+  },
+  {
+    "definition": "To take care of or raise a child or young animal.",
+    "forms": [
+      { "tense": "Present", "answer": "bring up" },
+      { "tense": "Past", "answer": "brought up" },
+      { "tense": "Past Participle", "answer": "brought up" }
+    ]
+  },
+  {
+    "definition": "To leave the ground and begin to fly (for an aircraft).",
+    "forms": [
+      { "tense": "Present", "answer": "take off" },
+      { "tense": "Past", "answer": "took off" },
+      { "tense": "Past Participle", "answer": "taken off" }
+    ]
+  },
+  {
+    "definition": "To meet someone by arrangement.",
+    "forms": [
+      { "tense": "Present", "answer": "meet up" },
+      { "tense": "Past", "answer": "met up" },
+      { "tense": "Past Participle", "answer": "met up" }
+    ]
+  },
+  {
+    "definition": "To submit something (a report, application, etc.).",
+    "forms": [
+      { "tense": "Present", "answer": "hand in" },
+      { "tense": "Past", "answer": "handed in" },
+      { "tense": "Past Participle", "answer": "handed in" }
+    ]
+  },
+  {
+    "definition": "To distribute or give something to a group of people.",
+    "forms": [
+      { "tense": "Present", "answer": "hand out" },
+      { "tense": "Past", "answer": "handed out" },
+      { "tense": "Past Participle", "answer": "handed out" }
+    ]
+  },
+  {
+    "definition": "To clean a room, house, or area thoroughly.",
+    "forms": [
+      { "tense": "Present", "answer": "clean up" },
+      { "tense": "Past", "answer": "cleaned up" },
+      { "tense": "Past Participle", "answer": "cleaned up" }
+    ]
+  },
+  {
+    "definition": "To discard or eliminate something.",
+    "forms": [
+      { "tense": "Present", "answer": "throw away" },
+      { "tense": "Past", "answer": "threw away" },
+      { "tense": "Past Participle", "answer": "thrown away" }
+    ]
+  },
+  {
+    "definition": "To think of or produce an idea, plan, or solution.",
+    "forms": [
+      { "tense": "Present", "answer": "come up with" },
+      { "tense": "Past", "answer": "came up with" },
+      { "tense": "Past Participle", "answer": "come up with" }
+    ]
+  },
+  {
+    "definition": "To postpone or delay something.",
+    "forms": [
+      { "tense": "Present", "answer": "put off" },
+      { "tense": "Past", "answer": "put off" },
+      { "tense": "Past Participle", "answer": "put off" }
+    ]
+  },
+  {
+    "definition": "To explode or suddenly become very angry.",
+    "forms": [
+      { "tense": "Present", "answer": "blow up" },
+      { "tense": "Past", "answer": "blew up" },
+      { "tense": "Past Participle", "answer": "blown up" }
+    ]
+  },
+  {
+    "definition": "To resolve or find a solution to a problem.",
+    "forms": [
+      { "tense": "Present", "answer": "figure out" },
+      { "tense": "Past", "answer": "figured out" },
+      { "tense": "Past Participle", "answer": "figured out" }
+    ]
+  },
+  {
+    "definition": "To reduce the amount or speed of something.",
+    "forms": [
+      { "tense": "Present", "answer": "slow down" },
+      { "tense": "Past", "answer": "slowed down" },
+      { "tense": "Past Participle", "answer": "slowed down" }
+    ]
+  },
+  {
+    "definition": "To collapse or fall to the ground.",
+    "forms": [
+      { "tense": "Present", "answer": "fall down" },
+      { "tense": "Past", "answer": "fell down" },
+      { "tense": "Past Participle", "answer": "fallen down" }
+    ]
+  },
+  {
+    "definition": "To start a journey or begin a trip.",
+    "forms": [
+      { "tense": "Present", "answer": "set off" },
+      { "tense": "Past", "answer": "set off" },
+      { "tense": "Past Participle", "answer": "set off" }
+    ]
+  },
+  {
+    "definition": "To continue or proceed with an activity.",
+    "forms": [
+      { "tense": "Present", "answer": "go on" },
+      { "tense": "Past", "answer": "went on" },
+      { "tense": "Past Participle", "answer": "gone on" }
+    ]
+  },
+  {
+    "definition": "To remove something or cause something to disappear.",
+    "forms": [
+      { "tense": "Present", "answer": "wipe out" },
+      { "tense": "Past", "answer": "wiped out" },
+      { "tense": "Past Participle", "answer": "wiped out" }
+    ]
+  },
+  {
+    "definition": "To pay a debt or fulfill an obligation.",
+    "forms": [
+      { "tense": "Present", "answer": "pay back" },
+      { "tense": "Past", "answer": "paid back" },
+      { "tense": "Past Participle", "answer": "paid back" }
+    ]
+  },
+  {
+    "definition": "To relax or become less tense.",
+    "forms": [
+      { "tense": "Present", "answer": "calm down" },
+      { "tense": "Past", "answer": "calmed down" },
+      { "tense": "Past Participle", "answer": "calmed down" }
+    ]
+  }
+]
