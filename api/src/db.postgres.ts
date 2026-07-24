@@ -1,14 +1,15 @@
-import { sql } from 'postgres'
+import postgres from 'postgres'
+import { randomBytes } from 'crypto'
 
 const DB_URL = process.env.DATABASE_URL
 if (!DB_URL) throw new Error('DATABASE_URL is required')
 
-const db = sql(DB_URL)
+const db = postgres(DB_URL)
 
 let initialized = false
 
 export function genId(): string {
-  return crypto.randomBytes(16).toString('hex')
+  return randomBytes(16).toString('hex')
 }
 
 export async function connectDB(): Promise<void> {
@@ -18,7 +19,7 @@ export async function connectDB(): Promise<void> {
 }
 
 async function createTables() {
-  await sql`
+  await db`
     CREATE TABLE IF NOT EXISTS users (
       id TEXT PRIMARY KEY,
       email TEXT,
@@ -39,12 +40,12 @@ async function createTables() {
     )
   `
 
-  await sql`CREATE INDEX IF NOT EXISTS idx_users_email ON users(email)`
-  await sql`CREATE INDEX IF NOT EXISTS idx_users_clerk_id ON users(clerk_id)`
-  await sql`CREATE INDEX IF NOT EXISTS idx_users_stripe_customer ON users(stripe_customer_id)`
-  await sql`CREATE INDEX IF NOT EXISTS idx_users_stripe_subscription ON users(stripe_subscription_id)`
+  await db`CREATE INDEX IF NOT EXISTS idx_users_email ON users(email)`
+  await db`CREATE INDEX IF NOT EXISTS idx_users_clerk_id ON users(clerk_id)`
+  await db`CREATE INDEX IF NOT EXISTS idx_users_stripe_customer ON users(stripe_customer_id)`
+  await db`CREATE INDEX IF NOT EXISTS idx_users_stripe_subscription ON users(stripe_subscription_id)`
 
-  await sql`
+  await db`
     CREATE TABLE IF NOT EXISTS purchases (
       id TEXT PRIMARY KEY,
       user_id TEXT,
@@ -55,10 +56,10 @@ async function createTables() {
       created_at TEXT
     )
   `
-  await sql`CREATE INDEX IF NOT EXISTS idx_purchases_user_id ON purchases(user_id)`
-  await sql`CREATE INDEX IF NOT EXISTS idx_purchases_stripe_session ON purchases(stripe_session_id)`
+  await db`CREATE INDEX IF NOT EXISTS idx_purchases_user_id ON purchases(user_id)`
+  await db`CREATE INDEX IF NOT EXISTS idx_purchases_stripe_session ON purchases(stripe_session_id)`
 
-  await sql`
+  await db`
     CREATE TABLE IF NOT EXISTS sessions (
       id TEXT PRIMARY KEY,
       token TEXT,
@@ -67,9 +68,9 @@ async function createTables() {
       expires_at TEXT
     )
   `
-  await sql`CREATE INDEX IF NOT EXISTS idx_sessions_token ON sessions(token)`
+  await db`CREATE INDEX IF NOT EXISTS idx_sessions_token ON sessions(token)`
 
-  await sql`
+  await db`
     CREATE TABLE IF NOT EXISTS verification_codes (
       id TEXT PRIMARY KEY,
       email TEXT,
@@ -80,7 +81,7 @@ async function createTables() {
     )
   `
 
-  await sql`
+  await db`
     CREATE TABLE IF NOT EXISTS resources (
       id TEXT PRIMARY KEY,
       user_id TEXT,
@@ -90,9 +91,9 @@ async function createTables() {
       created_at TEXT
     )
   `
-  await sql`CREATE INDEX IF NOT EXISTS idx_resources_user_id ON resources(user_id)`
+  await db`CREATE INDEX IF NOT EXISTS idx_resources_user_id ON resources(user_id)`
 
-  await sql`
+  await db`
     CREATE TABLE IF NOT EXISTS reading_sessions (
       id TEXT PRIMARY KEY,
       user_id TEXT,
@@ -102,10 +103,10 @@ async function createTables() {
       updated_at TEXT
     )
   `
-  await sql`CREATE INDEX IF NOT EXISTS idx_reading_sessions_user_id ON reading_sessions(user_id)`
-  await sql`CREATE INDEX IF NOT EXISTS idx_reading_sessions_resource_id ON reading_sessions(resource_id)`
+  await db`CREATE INDEX IF NOT EXISTS idx_reading_sessions_user_id ON reading_sessions(user_id)`
+  await db`CREATE INDEX IF NOT EXISTS idx_reading_sessions_resource_id ON reading_sessions(resource_id)`
 
-  await sql`
+  await db`
     CREATE TABLE IF NOT EXISTS study_activity (
       id TEXT PRIMARY KEY,
       user_id TEXT,
@@ -113,10 +114,10 @@ async function createTables() {
       count INTEGER DEFAULT 1
     )
   `
-  await sql`CREATE INDEX IF NOT EXISTS idx_study_activity_user_id ON study_activity(user_id)`
-  await sql`CREATE INDEX IF NOT EXISTS idx_study_activity_date ON study_activity(date)`
+  await db`CREATE INDEX IF NOT EXISTS idx_study_activity_user_id ON study_activity(user_id)`
+  await db`CREATE INDEX IF NOT EXISTS idx_study_activity_date ON study_activity(date)`
 
-  await sql`
+  await db`
     CREATE TABLE IF NOT EXISTS learned_words (
       id TEXT PRIMARY KEY,
       user_id TEXT,
@@ -125,9 +126,9 @@ async function createTables() {
       UNIQUE(user_id, word)
     )
   `
-  await sql`CREATE INDEX IF NOT EXISTS idx_learned_words_user_id ON learned_words(user_id)`
+  await db`CREATE INDEX IF NOT EXISTS idx_learned_words_user_id ON learned_words(user_id)`
 
-  await sql`
+  await db`
     CREATE TABLE IF NOT EXISTS game_sessions (
       id TEXT PRIMARY KEY,
       user_id TEXT,
@@ -138,9 +139,9 @@ async function createTables() {
       completed_at TEXT
     )
   `
-  await sql`CREATE INDEX IF NOT EXISTS idx_game_sessions_user_id ON game_sessions(user_id)`
+  await db`CREATE INDEX IF NOT EXISTS idx_game_sessions_user_id ON game_sessions(user_id)`
 
-  await sql`
+  await db`
     CREATE TABLE IF NOT EXISTS exam_sessions (
       id TEXT PRIMARY KEY,
       user_id TEXT,
@@ -151,9 +152,9 @@ async function createTables() {
       speaking TEXT
     )
   `
-  await sql`CREATE INDEX IF NOT EXISTS idx_exam_sessions_user_id ON exam_sessions(user_id)`
+  await db`CREATE INDEX IF NOT EXISTS idx_exam_sessions_user_id ON exam_sessions(user_id)`
 
-  await sql`
+  await db`
     CREATE TABLE IF NOT EXISTS booked_sessions (
       id TEXT PRIMARY KEY,
       teacher_id TEXT,
@@ -165,10 +166,10 @@ async function createTables() {
       created_at TEXT
     )
   `
-  await sql`CREATE INDEX IF NOT EXISTS idx_booked_sessions_student_id ON booked_sessions(student_id)`
-  await sql`CREATE INDEX IF NOT EXISTS idx_booked_sessions_teacher_id ON booked_sessions(teacher_id)`
+  await db`CREATE INDEX IF NOT EXISTS idx_booked_sessions_student_id ON booked_sessions(student_id)`
+  await db`CREATE INDEX IF NOT EXISTS idx_booked_sessions_teacher_id ON booked_sessions(teacher_id)`
 
-  await sql`
+  await db`
     CREATE TABLE IF NOT EXISTS offers (
       id TEXT PRIMARY KEY,
       code TEXT UNIQUE,
@@ -179,9 +180,9 @@ async function createTables() {
       created_at TEXT
     )
   `
-  await sql`CREATE INDEX IF NOT EXISTS idx_offers_code ON offers(code)`
+  await db`CREATE INDEX IF NOT EXISTS idx_offers_code ON offers(code)`
 
-  await sql`
+  await db`
     CREATE TABLE IF NOT EXISTS output_history (
       id TEXT PRIMARY KEY,
       user_id TEXT,
@@ -192,18 +193,18 @@ async function createTables() {
       completed_at TEXT
     )
   `
-  await sql`CREATE INDEX IF NOT EXISTS idx_output_history_user_id ON output_history(user_id)`
+  await db`CREATE INDEX IF NOT EXISTS idx_output_history_user_id ON output_history(user_id)`
 
-  await sql`
+  await db`
     CREATE TABLE IF NOT EXISTS stripe_events (
       id TEXT PRIMARY KEY,
       event_type TEXT NOT NULL,
       processed_at TEXT NOT NULL
     )
   `
-  await sql`CREATE INDEX IF NOT EXISTS idx_stripe_events_type ON stripe_events(event_type)`
+  await db`CREATE INDEX IF NOT EXISTS idx_stripe_events_type ON stripe_events(event_type)`
 
-  await sql`
+  await db`
     CREATE TABLE IF NOT EXISTS subscription_transactions (
       id TEXT PRIMARY KEY,
       user_id TEXT NOT NULL,
@@ -217,7 +218,7 @@ async function createTables() {
       created_at TEXT
     )
   `
-  await sql`CREATE INDEX IF NOT EXISTS idx_transactions_user_id ON subscription_transactions(user_id)`
+  await db`CREATE INDEX IF NOT EXISTS idx_transactions_user_id ON subscription_transactions(user_id)`
 }
 
 type QueryValue = string | number | boolean | null | undefined | Date | { $gt?: any; $gte?: any; $lt?: any; $lte?: any; $ne?: any }
@@ -387,7 +388,7 @@ async function insertMany(table: string, docs: any[]) {
 
 async function countDocuments(table: string, query: Query = {}) {
   const where = buildWhereClause(query)
-  const [row] = await db`SELECT COUNT(*) as count FROM ${sql(table)} ${sql.unsafe(where.sql, where.params)}`
+  const [row] = await db`SELECT COUNT(*) as count FROM ${db(table)} ${db.unsafe(where.sql, where.params)}`
   return row?.count || 0
 }
 

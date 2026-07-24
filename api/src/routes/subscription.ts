@@ -19,7 +19,7 @@ import {
 const subscription = new Hono()
 
 subscription.get('/', clerkAuth, async (c) => {
-  const clerkUserId = c.get('clerkUserId')
+  const clerkUserId = c.get('clerkUserId') as string
   const status = await getSubscriptionStatus(clerkUserId)
 
   return c.json({
@@ -35,7 +35,7 @@ subscription.get('/', clerkAuth, async (c) => {
 
 subscription.post('/create-checkout-session', clerkAuth, async (c) => {
   const { price_id } = await c.req.json()
-  const clerkUserId = c.get('clerkUserId')
+  const clerkUserId = c.get('clerkUserId') as string
   const appUrl = process.env.APP_URL || 'http://localhost:5173'
 
   if (!price_id) {
@@ -53,7 +53,7 @@ subscription.post('/create-checkout-session', clerkAuth, async (c) => {
 
 subscription.post('/create-session-checkout', clerkAuth, async (c) => {
   const { price_id, teacherId, teacherName, dateTime, topic } = await c.req.json()
-  const clerkUserId = c.get('clerkUserId')
+  const clerkUserId = c.get('clerkUserId') as string
   const appUrl = process.env.APP_URL || 'http://localhost:5173'
 
   if (!price_id) {
@@ -76,7 +76,7 @@ subscription.post('/create-session-checkout', clerkAuth, async (c) => {
 
 subscription.post('/create-exam-checkout', clerkAuth, async (c) => {
   const { price_id } = await c.req.json()
-  const clerkUserId = c.get('clerkUserId')
+  const clerkUserId = c.get('clerkUserId') as string
   const appUrl = process.env.APP_URL || 'http://localhost:5173'
 
   if (!price_id) {
@@ -93,7 +93,7 @@ subscription.post('/create-exam-checkout', clerkAuth, async (c) => {
 })
 
 subscription.post('/use-free-days', clerkAuth, async (c) => {
-  const clerkUserId = c.get('clerkUserId')
+  const clerkUserId = c.get('clerkUserId') as string
   const result = await processFreeDays(clerkUserId)
 
   if (!result.success) {
@@ -109,7 +109,7 @@ subscription.post('/use-free-days', clerkAuth, async (c) => {
 
 subscription.get('/verify-session/:sessionId', clerkAuth, async (c) => {
   const sessionId = c.req.param('sessionId')
-  const clerkUserId = c.get('clerkUserId')
+  const clerkUserId = c.get('clerkUserId') as string
 
   if (!sessionId) {
     return c.json({ error: 'session_id is required' }, 400)
@@ -331,7 +331,7 @@ subscription.post('/webhook', async (c) => {
 })
 
 subscription.get('/check', clerkAuth, async (c) => {
-  const clerkUserId = c.get('clerkUserId')
+  const clerkUserId = c.get('clerkUserId') as string
   const status = await getSubscriptionStatus(clerkUserId)
 
   return c.json({
