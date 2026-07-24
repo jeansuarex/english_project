@@ -19,8 +19,5 @@
   "devDependencies": {
     "@types/bun": "^1.1.13",
     "typescript": "^5.7.2"
-  },
-  "overrides": {
-    "postgres": "^3.4.5"
   }
 }
