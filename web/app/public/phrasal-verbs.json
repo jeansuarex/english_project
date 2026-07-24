@@ -318,5 +318,381 @@
       { "tense": "Past", "answer": "calmed down" },
       { "tense": "Past Participle", "answer": "calmed down" }
     ]
+  },
+  {
+    "definition": "To find someone or something that was lost or missing.",
+    "forms": [
+      { "tense": "Present", "answer": "look for" },
+      { "tense": "Past", "answer": "looked for" },
+      { "tense": "Past Participle", "answer": "looked for" }
+    ]
+  },
+  {
+    "definition": "To accidentally lose something or cause it to become lost.",
+    "forms": [
+      { "tense": "Present", "answer": "lose track" },
+      { "tense": "Past", "answer": "lost track" },
+      { "tense": "Past Participle", "answer": "lost track" }
+    ]
+  },
+  {
+    "definition": "To criticize or mock someone.",
+    "forms": [
+      { "tense": "Present", "answer": "laugh at" },
+      { "tense": "Past", "answer": "laughed at" },
+      { "tense": "Past Participle", "answer": "laughed at" }
+    ]
+  },
+  {
+    "definition": "To look forward to something.",
+    "forms": [
+      { "tense": "Present", "answer": "look forward to" },
+      { "tense": "Past", "answer": "looked forward to" },
+      { "tense": "Past Participle", "answer": "looked forward to" }
+    ]
+  },
+  {
+    "definition": "To reach a place or point.",
+    "forms": [
+      { "tense": "Present", "answer": "end up" },
+      { "tense": "Past", "answer": "ended up" },
+      { "tense": "Past Participle", "answer": "ended up" }
+    ]
+  },
+  {
+    "definition": "To help someone with something.",
+    "forms": [
+      { "tense": "Present", "answer": "help out" },
+      { "tense": "Past", "answer": "helped out" },
+      { "tense": "Past Participle", "answer": "helped out" }
+    ]
+  },
+  {
+    "definition": "To agree to do something that someone asks.",
+    "forms": [
+      { "tense": "Present", "answer": "go along with" },
+      { "tense": "Past", "answer": "went along with" },
+      { "tense": "Past Participle", "answer": "gone along with" }
+    ]
+  },
+  {
+    "definition": "To rely on someone or something.",
+    "forms": [
+      { "tense": "Present", "answer": "count on" },
+      { "tense": "Past", "answer": "counted on" },
+      { "tense": "Past Participle", "answer": "counted on" }
+    ]
+  },
+  {
+    "definition": "To experience or undergo something.",
+    "forms": [
+      { "tense": "Present", "answer": "go through" },
+      { "tense": "Past", "answer": "went through" },
+      { "tense": "Past Participle", "answer": "gone through" }
+    ]
+  },
+  {
+    "definition": "To reach a destination or achieve a goal.",
+    "forms": [
+      { "tense": "Present", "answer": "make it" },
+      { "tense": "Past", "answer": "made it" },
+      { "tense": "Past Participle", "answer": "made it" }
+    ]
+  },
+  {
+    "definition": "To establish a connection or relationship with someone.",
+    "forms": [
+      { "tense": "Present", "answer": "reach out" },
+      { "tense": "Past", "answer": "reached out" },
+      { "tense": "Past Participle", "answer": "reached out" }
+    ]
+  },
+  {
+    "definition": "To resemble one's parent or relative.",
+    "forms": [
+      { "tense": "Present", "answer": "take after" },
+      { "tense": "Past", "answer": "took after" },
+      { "tense": "Past Participle", "answer": "taken after" }
+    ]
+  },
+  {
+    "definition": "To care about or be concerned about something.",
+    "forms": [
+      { "tense": "Present", "answer": "worry about" },
+      { "tense": "Past", "answer": "worried about" },
+      { "tense": "Past Participle", "answer": "worried about" }
+    ]
+  },
+  {
+    "definition": "To confuse or cause someone to be mistaken.",
+    "forms": [
+      { "tense": "Present", "answer": "mix up" },
+      { "tense": "Past", "answer": "mixed up" },
+      { "tense": "Past Participle", "answer": "mixed up" }
+    ]
+  },
+  {
+    "definition": "To deceive or trick someone.",
+    "forms": [
+      { "tense": "Present", "answer": "fool someone" },
+      { "tense": "Past", "answer": "fooled someone" },
+      { "tense": "Past Participle", "answer": "fooled someone" }
+    ]
+  },
+  {
+    "definition": "To criticize someone strongly.",
+    "forms": [
+      { "tense": "Present", "answer": "tell off" },
+      { "tense": "Past", "answer": "told off" },
+      { "tense": "Past Participle", "answer": "told off" }
+    ]
+  },
+  {
+    "definition": "To return to a place after leaving it.",
+    "forms": [
+      { "tense": "Present", "answer": "come back" },
+      { "tense": "Past", "answer": "came back" },
+      { "tense": "Past Participle", "answer": "come back" }
+    ]
+  },
+  {
+    "definition": "To leave a place permanently or temporarily.",
+    "forms": [
+      { "tense": "Present", "answer": "move away" },
+      { "tense": "Past", "answer": "moved away" },
+      { "tense": "Past Participle", "answer": "moved away" }
+    ]
+  },
+  {
+    "definition": "To depart or leave somewhere.",
+    "forms": [
+      { "tense": "Present", "answer": "take off" },
+      { "tense": "Past", "answer": "took off" },
+      { "tense": "Past Participle", "answer": "taken off" }
+    ]
+  },
+  {
+    "definition": "To be taken away or removed by someone.",
+    "forms": [
+      { "tense": "Present", "answer": "be taken away" },
+      { "tense": "Past", "answer": "was taken away" },
+      { "tense": "Past Participle", "answer": "been taken away" }
+    ]
+  },
+  {
+    "definition": "To delay or cause someone to be late.",
+    "forms": [
+      { "tense": "Present", "answer": "hold up" },
+      { "tense": "Past", "answer": "held up" },
+      { "tense": "Past Participle", "answer": "held up" }
+    ]
+  },
+  {
+    "definition": "To take care of or manage a situation.",
+    "forms": [
+      { "tense": "Present", "answer": "deal with" },
+      { "tense": "Past", "answer": "dealt with" },
+      { "tense": "Past Participle", "answer": "dealt with" }
+    ]
+  },
+  {
+    "definition": "To endure or survive a difficult situation.",
+    "forms": [
+      { "tense": "Present", "answer": "get through" },
+      { "tense": "Past", "answer": "got through" },
+      { "tense": "Past Participle", "answer": "gotten through" }
+    ]
+  },
+  {
+    "definition": "To visit someone at their home.",
+    "forms": [
+      { "tense": "Present", "answer": "drop by" },
+      { "tense": "Past", "answer": "dropped by" },
+      { "tense": "Past Participle", "answer": "dropped by" }
+    ]
+  },
+  {
+    "definition": "To write someone's name on a document to sign it.",
+    "forms": [
+      { "tense": "Present", "answer": "sign away" },
+      { "tense": "Past", "answer": "signed away" },
+      { "tense": "Past Participle", "answer": "signed away" }
+    ]
+  },
+  {
+    "definition": "To officially give up a right, claim, or possession.",
+    "forms": [
+      { "tense": "Present", "answer": "give up" },
+      { "tense": "Past", "answer": "gave up" },
+      { "tense": "Past Participle", "answer": "given up" }
+    ]
+  },
+  {
+    "definition": "To cause someone to feel embarrassment or shame.",
+    "forms": [
+      { "tense": "Present", "answer": "let down" },
+      { "tense": "Past", "answer": "let down" },
+      { "tense": "Past Participle", "answer": "let down" }
+    ]
+  },
+  {
+    "definition": "To stop fighting or arguing and become friendly again.",
+    "forms": [
+      { "tense": "Present", "answer": "make up" },
+      { "tense": "Past", "answer": "made up" },
+      { "tense": "Past Participle", "answer": "made up" }
+    ]
+  },
+  {
+    "definition": "To put something into a liquid.",
+    "forms": [
+      { "tense": "Present", "answer": "put in" },
+      { "tense": "Past", "answer": "put in" },
+      { "tense": "Past Participle", "answer": "put in" }
+    ]
+  },
+  {
+    "definition": "To invest money in a business or project.",
+    "forms": [
+      { "tense": "Present", "answer": "put into" },
+      { "tense": "Past", "answer": "put into" },
+      { "tense": "Past Participle", "answer": "put into" }
+    ]
+  },
+  {
+    "definition": "To officially register or record something.",
+    "forms": [
+      { "tense": "Present", "answer": "sign up" },
+      { "tense": "Past", "answer": "signed up" },
+      { "tense": "Past Participle", "answer": "signed up" }
+    ]
+  },
+  {
+    "definition": "To make a person leave a place.",
+    "forms": [
+      { "tense": "Present", "answer": "throw out" },
+      { "tense": "Past", "answer": "threw out" },
+      { "tense": "Past Participle", "answer": "thrown out" }
+    ]
+  },
+  {
+    "definition": "To force someone to leave a job or position.",
+    "forms": [
+      { "tense": "Present", "answer": "push out" },
+      { "tense": "Past", "answer": "pushed out" },
+      { "tense": "Past Participle", "answer": "pushed out" }
+    ]
+  },
+  {
+    "definition": "To cause something to explode or be destroyed.",
+    "forms": [
+      { "tense": "Present", "answer": "blow up" },
+      { "tense": "Past", "answer": "blew up" },
+      { "tense": "Past Participle", "answer": "blown up" }
+    ]
+  },
+  {
+    "definition": "To arrive at a place after traveling.",
+    "forms": [
+      { "tense": "Present", "answer": "get in" },
+      { "tense": "Past", "answer": "got in" },
+      { "tense": "Past Participle", "answer": "gotten in" }
+    ]
+  },
+  {
+    "definition": "To leave a vehicle or transportation.",
+    "forms": [
+      { "tense": "Present", "answer": "get out" },
+      { "tense": "Past", "answer": "got out" },
+      { "tense": "Past Participle", "answer": "gotten out" }
+    ]
+  },
+  {
+    "definition": "To succeed in a test or examination.",
+    "forms": [
+      { "tense": "Present", "answer": "pass out" },
+      { "tense": "Past", "answer": "passed out" },
+      { "tense": "Past Participle", "answer": "passed out" }
+    ]
+  },
+  {
+    "definition": "To distribute something among a group.",
+    "forms": [
+      { "tense": "Present", "answer": "divide up" },
+      { "tense": "Past", "answer": "divided up" },
+      { "tense": "Past Participle", "answer": "divided up" }
+    ]
+  },
+  {
+    "definition": "To share something among a group.",
+    "forms": [
+      { "tense": "Present", "answer": "split up" },
+      { "tense": "Past", "answer": "split up" },
+      { "tense": "Past Participle", "answer": "split up" }
+    ]
+  },
+  {
+    "definition": "To cover something completely.",
+    "forms": [
+      { "tense": "Present", "answer": "block out" },
+      { "tense": "Past", "answer": "blocked out" },
+      { "tense": "Past Participle", "answer": "blocked out" }
+    ]
+  },
+  {
+    "definition": "To make someone feel very tired.",
+    "forms": [
+      { "tense": "Present", "answer": "wipe out" },
+      { "tense": "Past", "answer": "wiped out" },
+      { "tense": "Past Participle", "answer": "wiped out" }
+    ]
+  },
+  {
+    "definition": "To check that information is correct.",
+    "forms": [
+      { "tense": "Present", "answer": "check up on" },
+      { "tense": "Past", "answer": "checked up on" },
+      { "tense": "Past Participle", "answer": "checked up on" }
+    ]
+  },
+  {
+    "definition": "To follow or trail someone.",
+    "forms": [
+      { "tense": "Present", "answer": "run after" },
+      { "tense": "Past", "answer": "ran after" },
+      { "tense": "Past Participle", "answer": "run after" }
+    ]
+  },
+  {
+    "definition": "To escape from a place or situation.",
+    "forms": [
+      { "tense": "Present", "answer": "get away" },
+      { "tense": "Past", "answer": "got away" },
+      { "tense": "Past Participle", "answer": "gotten away" }
+    ]
+  },
+  {
+    "definition": "To manage or organize something.",
+    "forms": [
+      { "tense": "Present", "answer": "see to" },
+      { "tense": "Past", "answer": "saw to" },
+      { "tense": "Past Participle", "answer": "seen to" }
+    ]
+  },
+  {
+    "definition": "To return home or to one's country.",
+    "forms": [
+      { "tense": "Present", "answer": "go back" },
+      { "tense": "Past", "answer": "went back" },
+      { "tense": "Past Participle", "answer": "gone back" }
+    ]
+  },
+  {
+    "definition": "To cause a machine or system to stop working.",
+    "forms": [
+      { "tense": "Present", "answer": "crash" },
+      { "tense": "Past", "answer": "crashed" },
+      { "tense": "Past Participle", "answer": "crashed" }
+    ]
   }
 ]

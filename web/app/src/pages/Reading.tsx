@@ -38,6 +38,7 @@ export default function Reading() {
   const [targetLang, setTargetLang] = useState('es')
   const [learnedWords, setLearnedWords] = useState<Set<string>>(new Set())
   const [learnedAnim, setLearnedAnim] = useState<string | null>(null)
+  const [pdfUrl, setPdfUrl] = useState<string | null>(null)
 
   useEffect(() => {
     if (!user) return
@@ -51,6 +52,30 @@ export default function Reading() {
       } catch {}
     })
   }, [user, getToken])
+
+  useEffect(() => {
+    if (!resourceId || !user) return
+    let cancelled = false
+    getToken().then(async (token) => {
+      if (cancelled || !token) return
+      try {
+        const res = await fetch(`/api/resources/${resourceId}/file`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        if (!res.ok) throw new Error('Failed to fetch PDF')
+        const blob = await res.blob()
+        if (!cancelled) {
+          setPdfUrl(URL.createObjectURL(blob))
+        }
+      } catch (err) {
+        console.error('Failed to load PDF:', err)
+      }
+    })
+    return () => {
+      cancelled = true
+      setPdfUrl(null)
+    }
+  }, [resourceId, user, getToken])
 
   useEffect(() => {
     if (!learnedAnim) return
@@ -302,7 +327,7 @@ export default function Reading() {
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-cream)' }}>
         <div style={{ textAlign: 'center' }}>
           <h2>Resource not found</h2>
-           <button onClick={() => navigate('/dashboard?tab=resources')} style={{
+           <button onClick={() => navigate('/dashboard?tab=practice')} style={{
             marginTop: '16px', padding: '12px 24px', background: 'var(--sage)',
             color: 'white', border: 'none', borderRadius: 'var(--radius-sm)', fontWeight: 600, cursor: 'pointer',
           }}>
@@ -320,7 +345,7 @@ export default function Reading() {
         padding: '12px 24px', background: 'var(--card-white)', boxShadow: 'var(--shadow-soft)',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <button onClick={() => navigate('/dashboard?tab=resources')} style={{
+            <button onClick={() => navigate('/dashboard?tab=practice')} style={{
             padding: '8px 16px', background: 'transparent', border: '1px solid var(--olive)',
             borderRadius: 'var(--radius-sm)', cursor: 'pointer', fontSize: '14px',
             display: 'flex', alignItems: 'center', gap: '6px',
@@ -374,7 +399,7 @@ export default function Reading() {
           padding: '24px', background: 'var(--bg-cream)',
         }}>
           <Document
-            file={`/api/resources/${resourceId}/file`}
+            file={pdfUrl}
             onLoadSuccess={onDocumentLoadSuccess}
             loading={<p style={{ padding: '48px' }}>Loading PDF...</p>}
             error={<p style={{ padding: '48px', color: 'var(--danger-color)' }}>Failed to load PDF</p>}

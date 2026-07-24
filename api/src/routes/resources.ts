@@ -42,7 +42,7 @@ resources.post('/upload', clerkAuth, async (c) => {
     const resourcesCollection = getResourcesCollection()
     const count = await resourcesCollection.countDocuments({ userId })
     if (count >= 5) {
-      return c.json({ error: 'Máximo 5 PDFs por usuario' }, 400)
+      return c.json({ error: 'Maximum 5 PDFs per user' }, 400)
     }
 
     const buffer = Buffer.from(await file.arrayBuffer())
@@ -133,14 +133,19 @@ resources.delete('/:id', clerkAuth, async (c) => {
   }
 })
 
-resources.get('/:id/file', async (c) => {
+resources.get('/:id/file', clerkAuth, async (c) => {
   try {
     const id = c.req.param('id')
+    const userId = getUserId(c)
     const resourcesCollection = getResourcesCollection()
     const resource = await resourcesCollection.findOne({ _id: id })
 
     if (!resource) {
       return c.json({ error: 'Resource not found' }, 404)
+    }
+
+    if (resource.userId !== userId) {
+      return c.json({ error: 'Forbidden' }, 403)
     }
 
     if (!resource.data) {

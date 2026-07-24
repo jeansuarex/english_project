@@ -38,11 +38,11 @@ progress.post('/game-session', async (c) => {
 })
 
 const BADGE_DEFS = [
-  { id: 'vocab', name: 'Scholar', icon: '📖', desc: 'Add words to your vocabulary', bronze: 10, silver: 50, gold: 200 },
-  { id: 'definitions', name: 'Definition Ace', icon: '📝', desc: 'Complete definition rounds', bronze: 5, silver: 25, gold: 100 },
-  { id: 'transformations', name: 'Transformer', icon: '🔄', desc: 'Complete transformation rounds', bronze: 5, silver: 25, gold: 100 },
-  { id: 'listening', name: 'Listener', icon: '🎧', desc: 'Complete listening rounds', bronze: 5, silver: 25, gold: 100 },
-  { id: 'phrasal', name: 'Phrasal Pro', icon: '⭐', desc: 'Perfect phrasal verb rounds', bronze: 3, silver: 10, gold: 30 },
+  { id: 'vocab', name: 'Wordsmith', icon: '/images/WORDSMITH', desc: 'Add words to your vocabulary', bronze: 10, silver: 50, gold: 200, unit: 'words' },
+  { id: 'definitions', name: 'Definition Ace', icon: '📝', desc: 'Complete definition rounds', bronze: 5, silver: 25, gold: 100, unit: 'rounds' },
+  { id: 'transformations', name: 'Transformer', icon: '🔄', desc: 'Complete transformation rounds', bronze: 5, silver: 25, gold: 100, unit: 'rounds' },
+  { id: 'listening', name: 'Listener', icon: '🎧', desc: 'Complete listening rounds', bronze: 5, silver: 25, gold: 100, unit: 'rounds' },
+  { id: 'phrasal', name: 'Phrasal Pro', icon: '⭐', desc: 'Perfect phrasal verb rounds', bronze: 3, silver: 10, gold: 30, unit: 'perfect rounds' },
 ] as const
 
 progress.get('/badges', async (c) => {

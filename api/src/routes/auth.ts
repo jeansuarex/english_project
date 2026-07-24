@@ -20,7 +20,7 @@ auth.get('/me', clerkAuth, async (c) => {
         role: 'user',
       }
       const userData = { ...user, id: undefined, _id: undefined }
-      users.insertOne({ ...userData, _id: clerkUserId, clerkId: clerkUserId })
+      await users.insertOne({ ...userData, _id: clerkUserId, clerkId: clerkUserId })
     }
 
     return c.json({
@@ -32,6 +32,24 @@ auth.get('/me', clerkAuth, async (c) => {
     })
   } catch (error) {
     console.error('Get me error:', error)
+    return c.json({ error: 'Internal server error' }, 500)
+  }
+})
+
+auth.post('/sync', clerkAuth, async (c) => {
+  try {
+    const clerkUserId = (c as any).get('clerkUserId')
+    const { email, name } = await c.req.json()
+    const users = getUsersCollection()
+
+    const user = await users.findOne({ clerkId: clerkUserId })
+    if (user) {
+      await users.updateOne({ clerkId: clerkUserId }, { $set: { email, name } })
+    }
+
+    return c.json({ success: true })
+  } catch (error) {
+    console.error('Sync error:', error)
     return c.json({ error: 'Internal server error' }, 500)
   }
 })

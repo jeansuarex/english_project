@@ -9,10 +9,9 @@ interface GameResultsProps {
 export default function GameResults({ score, totalRounds, onPlayAgain }: GameResultsProps) {
   const navigate = useNavigate()
   const accuracy = totalRounds > 0 ? Math.round((score.correct / totalRounds) * 100) : 0
-  let gradeColor = 'var(--sage)'
+  let gradeColor = 'var(--error-color)'
   if (accuracy >= 80) gradeColor = 'var(--sage)'
   else if (accuracy >= 60) gradeColor = 'var(--danger-color)'
-  else gradeColor = 'var(--error-color)'
 
   return (
     <div style={{ textAlign: 'center', maxWidth: '440px', width: '100%' }}>

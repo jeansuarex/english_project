@@ -182,7 +182,7 @@ export default function Definitions() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <button onClick={() => {
             if (window.confirm('Leave this game? Your progress will be lost.')) {
-              navigate('/dashboard?tab=resources')
+              navigate('/dashboard?tab=practice')
             }
           }} style={{
             padding: '8px 18px', background: 'var(--surface-muted)',

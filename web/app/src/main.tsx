@@ -11,6 +11,17 @@ import Listening from './pages/Listening';
 import Definitions from './pages/Definitions';
 import Transformations from './pages/Transformations';
 import PhrasalVerbs from './pages/PhrasalVerbs';
+import Output from './pages/Output';
+import Exam from './pages/Exam';
+import ExamReading from './pages/ExamReading';
+import ExamListening from './pages/ExamListening';
+import ExamWriting from './pages/ExamWriting';
+import ExamSpeaking from './pages/ExamSpeaking';
+import Pricing from './pages/Pricing';
+import NoAccess from './pages/NoAccess';
+import SubscriptionSuccess from './pages/SubscriptionSuccess';
+import SSOCallback from './pages/SSOCallback';
+import PublicProfile from './pages/PublicProfile';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { ThemeProvider, useTheme } from './components/ThemeProvider';
 
@@ -170,12 +181,23 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <Routes>
             <Route path="/" element={<App />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/sso-callback" element={<SSOCallback />} />
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
             <Route path="/reading/:resourceId" element={<ProtectedRoute><Reading /></ProtectedRoute>} />
             <Route path="/listening" element={<ProtectedRoute><Listening /></ProtectedRoute>} />
             <Route path="/definitions" element={<ProtectedRoute><Definitions /></ProtectedRoute>} />
             <Route path="/transformations" element={<ProtectedRoute><Transformations /></ProtectedRoute>} />
             <Route path="/phrasal-verbs" element={<ProtectedRoute><PhrasalVerbs /></ProtectedRoute>} />
+            <Route path="/output" element={<ProtectedRoute><Output /></ProtectedRoute>} />
+            <Route path="/exam" element={<ProtectedRoute><Exam /></ProtectedRoute>} />
+            <Route path="/exam-reading" element={<ProtectedRoute><ExamReading /></ProtectedRoute>} />
+            <Route path="/exam-listening" element={<ProtectedRoute><ExamListening /></ProtectedRoute>} />
+            <Route path="/exam-writing" element={<ProtectedRoute><ExamWriting /></ProtectedRoute>} />
+            <Route path="/exam-speaking" element={<ProtectedRoute><ExamSpeaking /></ProtectedRoute>} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/no-access" element={<NoAccess />} />
+            <Route path="/subscription/success" element={<SubscriptionSuccess />} />
+            <Route path="/profile/:username" element={<PublicProfile />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

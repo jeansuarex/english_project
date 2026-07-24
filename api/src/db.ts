@@ -5,7 +5,7 @@ let db: Database | null = null
 
 const DB_PATH = process.env.DB_PATH || './data/shakespeare.db'
 
-function genId(): string {
+export function genId(): string {
   return randomBytes(16).toString('hex')
 }
 
@@ -22,7 +22,15 @@ function createTables() {
 
   db.run(`CREATE TABLE IF NOT EXISTS users (
     id TEXT PRIMARY KEY, email TEXT, name TEXT,
-    createdAt TEXT, clerkId TEXT, role TEXT DEFAULT 'user'
+    createdAt TEXT, clerkId TEXT, role TEXT DEFAULT 'user',
+    days_left INTEGER DEFAULT 0, subscription_end TEXT,
+    is_new_user INTEGER DEFAULT 1, has_used_free_days INTEGER DEFAULT 0
+  )`)
+
+  db.run(`CREATE TABLE IF NOT EXISTS purchases (
+    id TEXT PRIMARY KEY, userId TEXT, stripe_session_id TEXT,
+    amount INTEGER, days INTEGER, status TEXT DEFAULT 'pending',
+    createdAt TEXT
   )`)
 
   db.run(`CREATE TABLE IF NOT EXISTS sessions (
@@ -62,6 +70,29 @@ function createTables() {
     totalRounds INTEGER DEFAULT 0, completedAt TEXT
   )`)
 
+  db.run(`CREATE TABLE IF NOT EXISTS exam_sessions (
+    id TEXT PRIMARY KEY, userId TEXT, sessionDate TEXT,
+    reading TEXT, listening TEXT, writing TEXT, speaking TEXT
+  )`)
+
+  db.run(`CREATE TABLE IF NOT EXISTS booked_sessions (
+    id TEXT PRIMARY KEY, teacher_id TEXT, student_id TEXT,
+    session_datetime TEXT, topic TEXT, status TEXT DEFAULT 'pending',
+    price INTEGER DEFAULT 50, created_at TEXT
+  )`)
+
+  db.run(`CREATE TABLE IF NOT EXISTS offers (
+    id TEXT PRIMARY KEY, code TEXT UNIQUE, discount INTEGER,
+    type TEXT, description TEXT, active INTEGER DEFAULT 1,
+    createdAt TEXT
+  )`)
+
+  db.run(`CREATE TABLE IF NOT EXISTS output_history (
+    id TEXT PRIMARY KEY, userId TEXT, question TEXT,
+    level TEXT, levelReason TEXT, feedback TEXT,
+    completedAt TEXT
+  )`)
+
   // Indexes for common queries
   db.run('CREATE INDEX IF NOT EXISTS idx_users_email ON users(email)')
   db.run('CREATE INDEX IF NOT EXISTS idx_users_clerkId ON users(clerkId)')
@@ -73,6 +104,78 @@ function createTables() {
   db.run('CREATE INDEX IF NOT EXISTS idx_study_activity_date ON study_activity(date)')
   db.run('CREATE INDEX IF NOT EXISTS idx_learned_words_userId ON learned_words(userId)')
   db.run('CREATE INDEX IF NOT EXISTS idx_game_sessions_userId ON game_sessions(userId)')
+  db.run('CREATE INDEX IF NOT EXISTS idx_exam_sessions_userId ON exam_sessions(userId)')
+  db.run('CREATE INDEX IF NOT EXISTS idx_purchases_userId ON purchases(userId)')
+  db.run('CREATE INDEX IF NOT EXISTS idx_purchases_stripe_session ON purchases(stripe_session_id)')
+  db.run('CREATE INDEX IF NOT EXISTS idx_booked_sessions_student_id ON booked_sessions(student_id)')
+  db.run('CREATE INDEX IF NOT EXISTS idx_booked_sessions_teacher_id ON booked_sessions(teacher_id)')
+  db.run('CREATE INDEX IF NOT EXISTS idx_offers_code ON offers(code)')
+  db.run('CREATE INDEX IF NOT EXISTS idx_output_history_userId ON output_history(userId)')
+
+  migrateUsersTable()
+  createStripeTables()
+}
+
+function migrateUsersTable() {
+  if (!db) return
+  try {
+    db.run("ALTER TABLE users ADD COLUMN days_left INTEGER DEFAULT 0")
+  } catch { }
+  try {
+    db.run("ALTER TABLE users ADD COLUMN subscription_end TEXT")
+  } catch { }
+  try {
+    db.run("ALTER TABLE users ADD COLUMN is_new_user INTEGER DEFAULT 1")
+  } catch { }
+  try {
+    db.run("ALTER TABLE users ADD COLUMN has_used_free_days INTEGER DEFAULT 0")
+  } catch { }
+  try {
+    db.run("ALTER TABLE users ADD COLUMN stripe_customer_id TEXT")
+  } catch { }
+  try {
+    db.run("ALTER TABLE users ADD COLUMN stripe_subscription_id TEXT")
+  } catch { }
+  try {
+    db.run("ALTER TABLE users ADD COLUMN subscription_status TEXT DEFAULT 'none'")
+  } catch { }
+  try {
+    db.run("ALTER TABLE users ADD COLUMN subscription_start_date TEXT")
+  } catch { }
+  try {
+    db.run("ALTER TABLE users ADD COLUMN last_payment_date TEXT")
+  } catch { }
+  try {
+    db.run("ALTER TABLE users ADD COLUMN updatedAt TEXT")
+  } catch { }
+}
+
+function createStripeTables() {
+  if (!db) return
+
+  db.run(`CREATE TABLE IF NOT EXISTS stripe_events (
+    id TEXT PRIMARY KEY,
+    event_type TEXT NOT NULL,
+    processed_at TEXT NOT NULL
+  )`)
+
+  db.run(`CREATE TABLE IF NOT EXISTS subscription_transactions (
+    id TEXT PRIMARY KEY,
+    userId TEXT NOT NULL,
+    stripe_session_id TEXT,
+    stripe_subscription_id TEXT,
+    price_id TEXT,
+    days_added INTEGER,
+    amount_paid INTEGER,
+    status TEXT,
+    transaction_date TEXT,
+    createdAt TEXT
+  )`)
+
+  db.run('CREATE INDEX IF NOT EXISTS idx_users_stripe_customer ON users(stripe_customer_id)')
+  db.run('CREATE INDEX IF NOT EXISTS idx_users_stripe_subscription ON users(stripe_subscription_id)')
+  db.run('CREATE INDEX IF NOT EXISTS idx_stripe_events_type ON stripe_events(event_type)')
+  db.run('CREATE INDEX IF NOT EXISTS idx_transactions_userId ON subscription_transactions(userId)')
 }
 
 type QueryValue = string | number | boolean | null | undefined | Date | { $gt?: any; $gte?: any; $lt?: any; $lte?: any; $ne?: any }
@@ -324,6 +427,13 @@ export function getReadingSessionsCollection(): Collection { return coll('readin
 export function getStudyActivityCollection(): Collection { return coll('study_activity') }
 export function getLearnedWordsCollection(): Collection { return coll('learned_words') }
 export function getGameSessionsCollection(): Collection { return coll('game_sessions') }
+export function getExamSessionsCollection(): Collection { return coll('exam_sessions') }
+export function getPurchasesCollection(): Collection { return coll('purchases') }
+export function getStripeEventsCollection(): Collection { return coll('stripe_events') }
+export function getSubscriptionTransactionsCollection(): Collection { return coll('subscription_transactions') }
+export function getBookedSessionsCollection(): Collection { return coll('booked_sessions') }
+export function getOffersCollection(): Collection { return coll('offers') }
+export function getOutputHistoryCollection(): Collection { return coll('output_history') }
 
 
 export async function closeDB(): Promise<void> {

@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "buildCommand": "cd api && npm install && cd ../web/app && npm install && npm run build",
+  "outputDirectory": "web/app/dist",
+  "installCommand": "cd api && npm install",
+  "framework": null,
+  "functions": {
+    "api/src/vercel.ts": {
+      "runtime": "nodejs22.x"
+    }
+  },
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/src/vercel.ts" }
+  ],
+  "env": {
+    "DATABASE_URL": "@database-url"
+  }
+}
