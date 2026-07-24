@@ -758,7 +758,7 @@ app.post('/api/exam/session', clerkAuth, async (c) => {
       speaking: '{}',
     }
 
-    const result = collection.insertOne(newSession)
+    const result = await collection.insertOne(newSession)
     return c.json({
       ok: true,
       sessionId: result.insertedId,
