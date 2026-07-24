@@ -240,7 +240,7 @@ function snakeToCamel(obj: any): any {
     if (key === 'used') {
       result[camelKey] = toBool(value)
     } else if (camelKey === 'vocabulary') {
-      try { result[camelKey] = JSON.parse(value) } catch { result[camelKey] = value }
+      try { result[camelKey] = JSON.parse(value as string) } catch { result[camelKey] = value }
     } else {
       result[camelKey] = value
     }
@@ -343,7 +343,7 @@ async function insertDoc(table: string, doc: any): Promise<{ insertedId: string 
 
   const cols = Object.keys(flat).join(', ')
   const placeholders = Object.keys(flat).map((_, i) => `$${i + 1}`).join(', ')
-  const values = Object.values(flat)
+  const values = Object.values(flat) as any[]
 
   await db.unsafe(`INSERT INTO ${table} (${cols}) VALUES (${placeholders})`, values)
   return { insertedId: _id }

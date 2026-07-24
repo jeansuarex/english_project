@@ -8,7 +8,7 @@ exam.use('*', clerkAuth)
 
 exam.post('/session', async (c) => {
   try {
-    const userId = c.get('clerkUserId') as string
+    const userId = (c as any).get('clerkUserId')
     const body = await c.req.json()
     const { section } = body
 
@@ -75,7 +75,7 @@ const SubmitSchema = z.object({
 
 exam.post('/submit', async (c) => {
   try {
-    const userId = c.get('clerkUserId') as string
+    const userId = (c as any).get('clerkUserId')
     const body = await c.req.json()
     const data = SubmitSchema.parse(body)
 
@@ -123,7 +123,7 @@ exam.post('/submit', async (c) => {
 
 exam.get('/history', async (c) => {
   try {
-    const userId = c.get('clerkUserId') as string
+    const userId = (c as any).get('clerkUserId')
     const collection = getExamSessionsCollection()
 
     const sessions = await collection
@@ -150,7 +150,7 @@ exam.get('/history', async (c) => {
 
 exam.get('/session/today', async (c) => {
   try {
-    const userId = c.get('clerkUserId') as string
+    const userId = (c as any).get('clerkUserId')
     const collection = getExamSessionsCollection()
     const sessionDate = new Date().toISOString().split('T')[0]
 
