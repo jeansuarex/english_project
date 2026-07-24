@@ -313,7 +313,7 @@ subscription.post('/webhook', async (c) => {
       }
 
       case 'invoice.payment_failed': {
-        const invoice = event.data.object as Stripe.Invoice
+        const invoice = event.data.object as any
         if (invoice.subscription) {
           await handleSubscriptionUpdated(invoice.subscription as string, 'past_due')
         }
