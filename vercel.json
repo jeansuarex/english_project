@@ -4,11 +4,6 @@
   "outputDirectory": "web/app/dist",
   "installCommand": "cd api && npm install",
   "framework": null,
-  "functions": {
-    "api/src/vercel.ts": {
-      "runtime": "nodejs20.x"
-    }
-  },
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/src/vercel.ts" }
   ]
