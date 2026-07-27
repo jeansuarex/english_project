@@ -78,7 +78,7 @@ const UpdateUserSchema = z.object({
   name: z.string().min(2).optional(),
 })
 
-app.get('/api/users/', clerkAuth, async (c) => {
+app.get('/api/users', clerkAuth, async (c) => {
   try {
     const usersCollection = getUsersCollection()
     const allUsers = await usersCollection.find({}).toArray()
@@ -221,7 +221,7 @@ app.post('/api/resources/upload', clerkAuth, async (c) => {
   }
 })
 
-app.get('/api/resources/', clerkAuth, async (c) => {
+app.get('/api/resources', clerkAuth, async (c) => {
   try {
     const userId = getUserId(c)
     const resourcesCollection = getResourcesCollection()
@@ -418,7 +418,7 @@ app.post('/api/activity/log', clerkAuth, async (c) => {
   }
 })
 
-app.get('/api/activity/', clerkAuth, async (c) => {
+app.get('/api/activity', clerkAuth, async (c) => {
   try {
     const userId = (c as any).get('clerkUserId')
     const days = Math.min(365, Math.max(1, parseInt(c.req.query('days') || '365', 10)))
@@ -1143,7 +1143,7 @@ async function processPaymentCompletion(
   }
 }
 
-app.get('/api/subscription/', clerkAuth, async (c) => {
+app.get('/api/subscription', clerkAuth, async (c) => {
   const clerkUserId = (c as any).get('clerkUserId')
   const status = await getSubscriptionStatus(clerkUserId)
 
@@ -1624,7 +1624,7 @@ app.delete('/api/admin/offers/:id', adminAuth, async (c) => {
 })
 
 // ============= SESSIONS ROUTES (BOOKINGS) =============
-app.get('/api/sessions/', async (c) => {
+app.get('/api/sessions', async (c) => {
   const bookedSessions = getBookedSessionsCollection()
   const users = getUsersCollection()
   const clerkUserId = c.req.query('clerkUserId')
@@ -1659,7 +1659,7 @@ app.get('/api/sessions/', async (c) => {
   return c.json({ sessions: result })
 })
 
-app.post('/api/sessions/', clerkAuth, async (c) => {
+app.post('/api/sessions', clerkAuth, async (c) => {
   const { teacherId, studentId, sessionDatetime, topic } = await c.req.json()
   const bookedSessions = getBookedSessionsCollection()
 
