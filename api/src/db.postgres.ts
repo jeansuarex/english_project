@@ -266,17 +266,25 @@ function camelToSnake(obj: any): any {
   return result
 }
 
+// Map a query key (camelCase) to its Postgres column name (snake_case),
+// matching the conversion used when writing rows (camelToSnake). Keys that are
+// already snake_case pass through unchanged.
+function toColumn(key: string): string {
+  if (key === '_id') return 'id'
+  return key.replace(/[A-Z]/g, l => '_' + l.toLowerCase())
+}
+
 function buildWhereClause(query: Query): { sql: string; params: any[] } {
   const conditions: string[] = []
   const params: any[] = []
 
   for (const [key, value] of Object.entries(query)) {
     if (value === undefined || value === null) {
-      conditions.push(`${key} IS NULL`)
+      conditions.push(`${toColumn(key)} IS NULL`)
       continue
     }
 
-    const col = key === '_id' ? 'id' : key
+    const col = toColumn(key)
 
     if (typeof value === 'object' && !(value instanceof Date)) {
       const ops = value as Record<string, any>
@@ -310,7 +318,7 @@ function createCursor(table: string, query: Query = {}): Cursor {
   return {
     sort(sortObj: Record<string, number>) {
       const parts = Object.entries(sortObj).map(([k, dir]) => {
-        const col = k === '_id' ? 'id' : k
+        const col = toColumn(k)
         return `${col} ${dir === -1 ? 'DESC' : 'ASC'}`
       })
       orderClause = 'ORDER BY ' + parts.join(', ')
