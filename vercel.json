@@ -5,6 +5,7 @@
   "installCommand": "cd api && npm install",
   "framework": null,
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/src/vercel.ts" }
+    { "source": "/api/(.*)", "destination": "/api/src/vercel.ts" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
