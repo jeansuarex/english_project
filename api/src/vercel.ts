@@ -1,7 +1,7 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { logger } from 'hono/logger'
-import { db, connectDB, getUsersCollection, getSessionsCollection, getVerificationCodesCollection, getResourcesCollection, getReadingSessionsCollection, getStudyActivityCollection, getLearnedWordsCollection, getGameSessionsCollection, getExamSessionsCollection, getPurchasesCollection, getStripeEventsCollection, getSubscriptionTransactionsCollection, getBookedSessionsCollection, getOffersCollection, getOutputHistoryCollection } from './db.postgres.js'
+import { connectDB, getUsersCollection, getSessionsCollection, getVerificationCodesCollection, getResourcesCollection, getReadingSessionsCollection, getStudyActivityCollection, getLearnedWordsCollection, getGameSessionsCollection, getExamSessionsCollection, getPurchasesCollection, getStripeEventsCollection, getSubscriptionTransactionsCollection, getBookedSessionsCollection, getOffersCollection, getOutputHistoryCollection } from './db.postgres.js'
 import { clerkAuth, adminAuth } from './middleware/auth.js'
 import Stripe from 'stripe'
 import { z } from 'zod'
@@ -21,25 +21,6 @@ app.use('*', cors({
 }))
 
 app.get('/health', (c) => c.json({ status: 'ok', timestamp: new Date().toISOString() }))
-
-// TEMP debug: reveal persisted DB state (no auth). Remove after diagnosis.
-app.get('/api/debug/state', async (c) => {
-  const clerkId = c.req.query('clerkId') || ''
-  const users = getUsersCollection()
-  const userCount = await users.countDocuments({})
-  const user = clerkId ? await users.findOne({ clerkId }) : null
-  // also test a write+read within the same connection via a transaction
-  let txTest: any = null
-  try {
-    await (db as any).begin(async (sql: any) => {
-      await sql`UPDATE users SET days_left = 7 WHERE clerk_id = ${clerkId}`
-      const rows = await sql`SELECT days_left, has_used_free_days FROM users WHERE clerk_id = ${clerkId}`
-      txTest = rows[0] || null
-    })
-  } catch (e: any) { txTest = { error: e.message } }
-  const afterTx = clerkId ? await users.findOne({ clerkId }) : null
-  return c.json({ userCount, user, txTest, afterTxDaysLeft: afterTx?.days_left })
-})
 
 // ============= AUTH ROUTES =============
 app.get('/api/auth/me', clerkAuth, async (c) => {
@@ -987,9 +968,6 @@ async function processFreeDays(clerkUserId: string) {
       }
     }
   )
-
-  const reread = await usersCollection.findOne({ clerkId: clerkUserId })
-  console.log('[freeDays reread]', JSON.stringify({ days_left: reread?.days_left, has_used_free_days: reread?.has_used_free_days, subscription_end: reread?.subscription_end }))
 
   await getSubscriptionTransactionsCollection().insertOne({
     id: genOutputId(),

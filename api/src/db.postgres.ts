@@ -4,7 +4,11 @@ import { randomBytes } from 'crypto'
 const DB_URL = process.env.DATABASE_URL
 if (!DB_URL) throw new Error('DATABASE_URL is required')
 
-const db = postgres(DB_URL)
+// prepare:false is required with Neon's pooled connection (PgBouncer in
+// transaction mode). With prepared statements enabled, a SELECT issued right
+// after a write can hit a pooled backend without the cached plan and return
+// stale/empty results, so read-after-write appeared to "not persist".
+const db = postgres(DB_URL, { prepare: false })
 
 let initialized = false
 
@@ -379,10 +383,7 @@ async function updateOne(table: string, query: Query, update: UpdateOp) {
   // WHERE placeholders must continue after the SET placeholders, or a shared
   // $1 would force conflicting type inference across columns.
   const where = buildWhereClause(query, setValues.length)
-  const sqlStr = `UPDATE ${table} SET ${setClauses} ${where.sql}`
-  const allParams = [...setValues, ...where.params]
-  const res = await db.unsafe(sqlStr, allParams)
-  console.log('[updateOne]', JSON.stringify({ sql: sqlStr, params: allParams, count: (res as any).count }))
+  await db.unsafe(`UPDATE ${table} SET ${setClauses} ${where.sql}`, [...setValues, ...where.params])
 }
 
 async function deleteOne(table: string, query: Query) {
