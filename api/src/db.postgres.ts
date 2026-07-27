@@ -379,7 +379,10 @@ async function updateOne(table: string, query: Query, update: UpdateOp) {
   // WHERE placeholders must continue after the SET placeholders, or a shared
   // $1 would force conflicting type inference across columns.
   const where = buildWhereClause(query, setValues.length)
-  await db.unsafe(`UPDATE ${table} SET ${setClauses} ${where.sql}`, [...setValues, ...where.params])
+  const sqlStr = `UPDATE ${table} SET ${setClauses} ${where.sql}`
+  const allParams = [...setValues, ...where.params]
+  const res = await db.unsafe(sqlStr, allParams)
+  console.log('[updateOne]', JSON.stringify({ sql: sqlStr, params: allParams, count: (res as any).count }))
 }
 
 async function deleteOne(table: string, query: Query) {
