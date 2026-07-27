@@ -969,6 +969,9 @@ async function processFreeDays(clerkUserId: string) {
     }
   )
 
+  const reread = await usersCollection.findOne({ clerkId: clerkUserId })
+  console.log('[freeDays reread]', JSON.stringify({ days_left: reread?.days_left, has_used_free_days: reread?.has_used_free_days, subscription_end: reread?.subscription_end }))
+
   await getSubscriptionTransactionsCollection().insertOne({
     id: genOutputId(),
     userId: clerkUserId,
