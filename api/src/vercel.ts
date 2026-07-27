@@ -11,7 +11,9 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
   apiVersion: '2026-06-24.dahlia'
 })
 
-const app = new Hono()
+// strict: false so routes match with or without a trailing slash — the
+// frontend calls e.g. /api/subscription while routes are /api/subscription/.
+const app = new Hono({ strict: false })
 
 app.use('*', logger())
 app.use('*', cors({
