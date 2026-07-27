@@ -274,9 +274,13 @@ function toColumn(key: string): string {
   return key.replace(/[A-Z]/g, l => '_' + l.toLowerCase())
 }
 
-function buildWhereClause(query: Query): { sql: string; params: any[] } {
+// startIndex is the number of placeholders already consumed before this WHERE
+// clause (e.g. by a SET list in UPDATE), so $N numbering continues correctly
+// instead of colliding with earlier params.
+function buildWhereClause(query: Query, startIndex = 0): { sql: string; params: any[] } {
   const conditions: string[] = []
   const params: any[] = []
+  const ph = () => `$${startIndex + params.length + 1}`
 
   for (const [key, value] of Object.entries(query)) {
     if (value === undefined || value === null) {
@@ -288,13 +292,13 @@ function buildWhereClause(query: Query): { sql: string; params: any[] } {
 
     if (typeof value === 'object' && !(value instanceof Date)) {
       const ops = value as Record<string, any>
-      if (ops.$gt !== undefined) { conditions.push(`${col} > $${params.length + 1}`); params.push(ops.$gt) }
-      else if (ops.$gte !== undefined) { conditions.push(`${col} >= $${params.length + 1}`); params.push(ops.$gte) }
-      else if (ops.$lt !== undefined) { conditions.push(`${col} < $${params.length + 1}`); params.push(ops.$lt) }
-      else if (ops.$lte !== undefined) { conditions.push(`${col} <= $${params.length + 1}`); params.push(ops.$lte) }
-      else if (ops.$ne !== undefined) { conditions.push(`${col} != $${params.length + 1}`); params.push(ops.$ne) }
+      if (ops.$gt !== undefined) { conditions.push(`${col} > ${ph()}`); params.push(ops.$gt) }
+      else if (ops.$gte !== undefined) { conditions.push(`${col} >= ${ph()}`); params.push(ops.$gte) }
+      else if (ops.$lt !== undefined) { conditions.push(`${col} < ${ph()}`); params.push(ops.$lt) }
+      else if (ops.$lte !== undefined) { conditions.push(`${col} <= ${ph()}`); params.push(ops.$lte) }
+      else if (ops.$ne !== undefined) { conditions.push(`${col} != ${ph()}`); params.push(ops.$ne) }
     } else {
-      conditions.push(`${col} = $${params.length + 1}`)
+      conditions.push(`${col} = ${ph()}`)
       params.push(value)
     }
   }
@@ -358,8 +362,6 @@ async function insertDoc(table: string, doc: any): Promise<{ insertedId: string 
 }
 
 async function updateOne(table: string, query: Query, update: UpdateOp) {
-  const where = buildWhereClause(query)
-
   let setFields: Record<string, any> = {}
   if ('$set' in update && update.$set) {
     setFields = { ...update.$set }
@@ -372,9 +374,12 @@ async function updateOne(table: string, query: Query, update: UpdateOp) {
   const setClauses = Object.entries(flat).map(([k], i) => `${k} = $${i + 1}`).join(', ')
   const setValues = Object.values(flat)
 
-  if (setClauses) {
-    await db.unsafe(`UPDATE ${table} SET ${setClauses} ${where.sql}`, [...setValues, ...where.params])
-  }
+  if (!setClauses) return
+
+  // WHERE placeholders must continue after the SET placeholders, or a shared
+  // $1 would force conflicting type inference across columns.
+  const where = buildWhereClause(query, setValues.length)
+  await db.unsafe(`UPDATE ${table} SET ${setClauses} ${where.sql}`, [...setValues, ...where.params])
 }
 
 async function deleteOne(table: string, query: Query) {
