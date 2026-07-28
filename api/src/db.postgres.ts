@@ -1,19 +1,19 @@
 import postgres from 'postgres'
 import { randomBytes } from 'crypto'
 
-// Prefer Neon's POOLED (PgBouncer) endpoint. In serverless, many concurrent
-// cold-start lambdas each open a connection; the direct/unpooled endpoint has a
-// low connection cap and starts rejecting under load (intermittent 500s). The
-// pooled endpoint is built for exactly this. Fall back to the direct URLs only
-// if the pooled one is missing.
-const DB_URL = process.env.DATABASE_URL
-  || process.env.POSTGRES_URL
-  || process.env.DATABASE_URL_UNPOOLED
+// The live database is NEON, reachable via the Neon-integration vars
+// (*_UNPOOLED / NON_POOLING). DATABASE_URL / POSTGRES_URL were repointed to a
+// now-dead Supabase host during an abandoned migration (queries failed with
+// "getaddrinfo ENOTFOUND db.<...>.supabase.co"), so those must NOT be used
+// first — only as a last-resort fallback.
+const DB_URL = process.env.DATABASE_URL_UNPOOLED
   || process.env.POSTGRES_URL_NON_POOLING
+  || process.env.DATABASE_URL
+  || process.env.POSTGRES_URL
 if (!DB_URL) throw new Error('DATABASE_URL is required')
 
-// prepare:false is required for Neon's pooled (PgBouncer) endpoint. Small pool
-// keeps us serverless-friendly.
+// prepare:false is required for Neon's pooled (PgBouncer) endpoint and harmless
+// on the direct one. Small pool keeps us serverless-friendly.
 const db = postgres(DB_URL, { prepare: false, max: 5, idle_timeout: 20 })
 
 let initialized = false
