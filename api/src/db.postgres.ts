@@ -1,12 +1,17 @@
 import postgres from 'postgres'
 import { randomBytes } from 'crypto'
 
-const DB_URL = process.env.DATABASE_URL
+// Prefer Neon's direct (unpooled) endpoint — the connection that worked
+// reliably in production. Reading only DATABASE_URL crashed the function at
+// startup (top-level await connectDB()), taking down every /api/* route.
+const DB_URL = process.env.DATABASE_URL_UNPOOLED
+  || process.env.POSTGRES_URL_NON_POOLING
+  || process.env.DATABASE_URL
 if (!DB_URL) throw new Error('DATABASE_URL is required')
 
-// prepare:false is Neon's recommended setting for the pooled (PgBouncer)
-// connection used in serverless.
-const db = postgres(DB_URL, { prepare: false })
+// prepare:false is required for Neon's pooled (PgBouncer) endpoint and harmless
+// on the direct one. Small pool keeps us serverless-friendly.
+const db = postgres(DB_URL, { prepare: false, max: 5, idle_timeout: 20 })
 
 let initialized = false
 
