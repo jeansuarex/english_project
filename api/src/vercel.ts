@@ -1011,6 +1011,10 @@ async function processFreeDays(clerkUserId: string) {
 async function getSubscriptionStatus(clerkUserId: string) {
   const usersCollection = getUsersCollection()
   const user = await usersCollection.findOne({ clerkId: clerkUserId })
+  try {
+    const raw = await db`SELECT days_left, subscription_end FROM users WHERE clerk_id = ${clerkUserId}`
+    console.log('[getSub]', JSON.stringify({ clerkUserId, findOneDays: user?.days_left, findOneEnd: user?.subscription_end, rawDays: raw[0]?.days_left, rawEnd: raw[0]?.subscription_end }))
+  } catch (e: any) { console.log('[getSub] rawErr', e.message) }
 
   if (!user) {
     return {
