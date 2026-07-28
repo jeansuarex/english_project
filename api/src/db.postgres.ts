@@ -1,16 +1,19 @@
 import postgres from 'postgres'
 import { randomBytes } from 'crypto'
 
-// Prefer Neon's direct (unpooled) endpoint — the connection that worked
-// reliably in production. Reading only DATABASE_URL crashed the function at
-// startup (top-level await connectDB()), taking down every /api/* route.
-const DB_URL = process.env.DATABASE_URL_UNPOOLED
+// Prefer Neon's POOLED (PgBouncer) endpoint. In serverless, many concurrent
+// cold-start lambdas each open a connection; the direct/unpooled endpoint has a
+// low connection cap and starts rejecting under load (intermittent 500s). The
+// pooled endpoint is built for exactly this. Fall back to the direct URLs only
+// if the pooled one is missing.
+const DB_URL = process.env.DATABASE_URL
+  || process.env.POSTGRES_URL
+  || process.env.DATABASE_URL_UNPOOLED
   || process.env.POSTGRES_URL_NON_POOLING
-  || process.env.DATABASE_URL
 if (!DB_URL) throw new Error('DATABASE_URL is required')
 
-// prepare:false is required for Neon's pooled (PgBouncer) endpoint and harmless
-// on the direct one. Small pool keeps us serverless-friendly.
+// prepare:false is required for Neon's pooled (PgBouncer) endpoint. Small pool
+// keeps us serverless-friendly.
 const db = postgres(DB_URL, { prepare: false, max: 5, idle_timeout: 20 })
 
 let initialized = false
@@ -21,7 +24,14 @@ export function genId(): string {
 
 export async function connectDB(): Promise<void> {
   if (initialized) return
-  await createTables()
+  // The tables already exist in production, so a failed DDL run (e.g. a
+  // transient connection hiccup during a cold start) must NOT fail the request.
+  // Best-effort create, then continue — reads/writes work regardless.
+  try {
+    await createTables()
+  } catch (err) {
+    console.error('connectDB: createTables failed, continuing (tables likely already exist):', err instanceof Error ? err.message : err)
+  }
   initialized = true
 }
 
