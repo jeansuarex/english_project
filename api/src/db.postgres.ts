@@ -1,14 +1,19 @@
 import postgres from 'postgres'
 import { randomBytes } from 'crypto'
 
-const DB_URL = process.env.DATABASE_URL
+// Use the direct (unpooled) Neon endpoint. The pooled endpoint (PgBouncer,
+// "-pooler" host) returned stale/empty reads: writes committed to the DB but a
+// subsequent SELECT over the pooler intermittently saw old data, so free days
+// looked like they never persisted. The direct endpoint gives consistent
+// read-after-write. Fall back to the pooled URL only if unpooled is absent.
+const DB_URL = process.env.DATABASE_URL_UNPOOLED
+  || process.env.POSTGRES_URL_NON_POOLING
+  || process.env.DATABASE_URL
 if (!DB_URL) throw new Error('DATABASE_URL is required')
 
-// prepare:false is required with Neon's pooled connection (PgBouncer in
-// transaction mode). With prepared statements enabled, a SELECT issued right
-// after a write can hit a pooled backend without the cached plan and return
-// stale/empty results, so read-after-write appeared to "not persist".
-const db = postgres(DB_URL, { prepare: false })
+// Small pool + prepare:false keep us serverless-friendly and safe if DB_URL
+// ever falls back to the pooled endpoint.
+const db = postgres(DB_URL, { prepare: false, max: 5, idle_timeout: 20 })
 
 let initialized = false
 

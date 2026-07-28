@@ -22,18 +22,6 @@ app.use('*', cors({
 
 app.get('/health', (c) => c.json({ status: 'ok', timestamp: new Date().toISOString() }))
 
-// TEMP: report which DB host the app is connected to (no credentials). Remove after.
-app.get('/api/debug/conn', (c) => {
-  const hostOf = (u?: string) => { try { return u ? new URL(u).host : null } catch { return 'invalid' } }
-  const dbEnvNames = Object.keys(process.env).filter(k => /DATABASE|POSTGRES|PG/i.test(k)).sort()
-  return c.json({
-    activeHost: hostOf(process.env.DATABASE_URL),
-    unpooledHost: hostOf(process.env.DATABASE_URL_UNPOOLED),
-    nonPoolingHost: hostOf(process.env.POSTGRES_URL_NON_POOLING),
-    dbEnvNames,
-  })
-})
-
 // ============= AUTH ROUTES =============
 app.get('/api/auth/me', clerkAuth, async (c) => {
   try {
