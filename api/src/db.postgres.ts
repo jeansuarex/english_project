@@ -1,19 +1,12 @@
 import postgres from 'postgres'
 import { randomBytes } from 'crypto'
 
-// Use the direct (unpooled) Neon endpoint. The pooled endpoint (PgBouncer,
-// "-pooler" host) returned stale/empty reads: writes committed to the DB but a
-// subsequent SELECT over the pooler intermittently saw old data, so free days
-// looked like they never persisted. The direct endpoint gives consistent
-// read-after-write. Fall back to the pooled URL only if unpooled is absent.
-const DB_URL = process.env.DATABASE_URL_UNPOOLED
-  || process.env.POSTGRES_URL_NON_POOLING
-  || process.env.DATABASE_URL
+const DB_URL = process.env.DATABASE_URL
 if (!DB_URL) throw new Error('DATABASE_URL is required')
 
-// Small pool + prepare:false keep us serverless-friendly and safe if DB_URL
-// ever falls back to the pooled endpoint.
-const db = postgres(DB_URL, { prepare: false, max: 5, idle_timeout: 20 })
+// prepare:false is Neon's recommended setting for the pooled (PgBouncer)
+// connection used in serverless.
+const db = postgres(DB_URL, { prepare: false })
 
 let initialized = false
 
@@ -240,19 +233,25 @@ function toBool(v: any): boolean {
   return !!v
 }
 
+// Expose every column under BOTH its snake_case and camelCase name. The app
+// was written against the SQLite adapter whose schema mixed casings (clerkId,
+// createdAt but days_left, has_used_free_days), so callers read a mix of both.
+// Postgres columns are all snake_case; providing both aliases makes every
+// existing read (user.days_left AND user.clerkId) resolve correctly.
 function snakeToCamel(obj: any): any {
   if (!obj) return null
   const result: any = { _id: obj.id }
   for (const [key, value] of Object.entries(obj)) {
     if (key === 'id') continue
     const camelKey = key.replace(/_([a-z])/g, (_, l) => l.toUpperCase())
+    let v: any = value
     if (key === 'used') {
-      result[camelKey] = toBool(value)
-    } else if (camelKey === 'vocabulary') {
-      try { result[camelKey] = JSON.parse(value as string) } catch { result[camelKey] = value }
-    } else {
-      result[camelKey] = value
+      v = toBool(value)
+    } else if (key === 'vocabulary') {
+      try { v = JSON.parse(value as string) } catch { v = value }
     }
+    result[key] = v
+    if (camelKey !== key) result[camelKey] = v
   }
   return result
 }

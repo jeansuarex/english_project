@@ -1,7 +1,7 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { logger } from 'hono/logger'
-import { db, connectDB, getUsersCollection, getSessionsCollection, getVerificationCodesCollection, getResourcesCollection, getReadingSessionsCollection, getStudyActivityCollection, getLearnedWordsCollection, getGameSessionsCollection, getExamSessionsCollection, getPurchasesCollection, getStripeEventsCollection, getSubscriptionTransactionsCollection, getBookedSessionsCollection, getOffersCollection, getOutputHistoryCollection } from './db.postgres.js'
+import { connectDB, getUsersCollection, getSessionsCollection, getVerificationCodesCollection, getResourcesCollection, getReadingSessionsCollection, getStudyActivityCollection, getLearnedWordsCollection, getGameSessionsCollection, getExamSessionsCollection, getPurchasesCollection, getStripeEventsCollection, getSubscriptionTransactionsCollection, getBookedSessionsCollection, getOffersCollection, getOutputHistoryCollection } from './db.postgres.js'
 import { clerkAuth, adminAuth } from './middleware/auth.js'
 import Stripe from 'stripe'
 import { z } from 'zod'
@@ -21,23 +21,6 @@ app.use('*', cors({
 }))
 
 app.get('/health', (c) => c.json({ status: 'ok', timestamp: new Date().toISOString() }))
-
-// TEMP: definitive check of what the app's own connection reads. Remove after.
-app.get('/api/debug/final', async (c) => {
-  const clerkId = c.req.query('clerkId') || ''
-  const info = (u?: string) => { try { const x = new URL(u!); return x.host + x.pathname } catch { return null } }
-  const out: any = {
-    activeUrl: info(process.env.DATABASE_URL),
-    unpooledUrl: info(process.env.DATABASE_URL_UNPOOLED),
-  }
-  try {
-    out.whichDb = (await db`SELECT current_database() AS db, current_setting('server_version') AS ver`)[0]
-    out.userCount = (await db`SELECT count(*)::int AS n FROM users`)[0]?.n
-    out.rawRow = (await db`SELECT clerk_id, days_left, has_used_free_days, subscription_status, subscription_end FROM users WHERE clerk_id = ${clerkId}`)[0] || null
-    out.findOneRow = await getUsersCollection().findOne({ clerkId })
-  } catch (e: any) { out.error = e.message }
-  return c.json(out)
-})
 
 // ============= AUTH ROUTES =============
 app.get('/api/auth/me', clerkAuth, async (c) => {
@@ -1011,10 +994,6 @@ async function processFreeDays(clerkUserId: string) {
 async function getSubscriptionStatus(clerkUserId: string) {
   const usersCollection = getUsersCollection()
   const user = await usersCollection.findOne({ clerkId: clerkUserId })
-  try {
-    const raw = await db`SELECT days_left, subscription_end FROM users WHERE clerk_id = ${clerkUserId}`
-    console.log('[getSub]', JSON.stringify({ clerkUserId, findOneDays: user?.days_left, findOneEnd: user?.subscription_end, rawDays: raw[0]?.days_left, rawEnd: raw[0]?.subscription_end }))
-  } catch (e: any) { console.log('[getSub] rawErr', e.message) }
 
   if (!user) {
     return {
