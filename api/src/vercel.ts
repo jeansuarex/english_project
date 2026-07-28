@@ -20,6 +20,19 @@ app.use('*', cors({
   credentials: true,
 }))
 
+// Initialize the DB lazily on the first request instead of at module load.
+// A top-level `await connectDB()` ran during cold boot, and when that init was
+// slow or failed it crashed the whole function (FUNCTION_INVOCATION_FAILED) on
+// every /api/* route — intermittently, since warm instances were unaffected.
+// Running it in request scope gives it the full request budget and lets a
+// failure surface as a normal 500 (and retry on the next request).
+let dbReady: Promise<void> | null = null
+app.use('*', async (c, next) => {
+  if (!dbReady) dbReady = connectDB().catch((err) => { dbReady = null; throw err })
+  await dbReady
+  await next()
+})
+
 app.get('/health', (c) => c.json({ status: 'ok', timestamp: new Date().toISOString() }))
 
 // ============= AUTH ROUTES =============
@@ -1766,7 +1779,5 @@ app.get('/api/profile/:username', async (c) => {
     return c.json({ error: 'Internal server error' }, 500)
   }
 })
-
-await connectDB()
 
 export default app
