@@ -1,7 +1,7 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { logger } from 'hono/logger'
-import { db, connectDB, getUsersCollection, getSessionsCollection, getVerificationCodesCollection, getResourcesCollection, getReadingSessionsCollection, getStudyActivityCollection, getLearnedWordsCollection, getGameSessionsCollection, getExamSessionsCollection, getPurchasesCollection, getStripeEventsCollection, getSubscriptionTransactionsCollection, getBookedSessionsCollection, getOffersCollection, getOutputHistoryCollection } from './db.postgres.js'
+import { connectDB, getUsersCollection, getSessionsCollection, getVerificationCodesCollection, getResourcesCollection, getReadingSessionsCollection, getStudyActivityCollection, getLearnedWordsCollection, getGameSessionsCollection, getExamSessionsCollection, getPurchasesCollection, getStripeEventsCollection, getSubscriptionTransactionsCollection, getBookedSessionsCollection, getOffersCollection, getOutputHistoryCollection } from './db.postgres.js'
 import { clerkAuth, adminAuth } from './middleware/auth.js'
 import Stripe from 'stripe'
 import { z } from 'zod'
@@ -21,31 +21,6 @@ app.use('*', cors({
 }))
 
 app.get('/health', (c) => c.json({ status: 'ok', timestamp: new Date().toISOString() }))
-
-// TEMP debug v2: isolate write persistence (no auth). Remove after diagnosis.
-app.get('/api/debug/write', async (c) => {
-  const clerkId = c.req.query('clerkId') || ''
-  const out: any = {}
-  try {
-    out.rowsBefore = await db`SELECT id, clerk_id, days_left, has_used_free_days, is_new_user FROM users WHERE clerk_id = ${clerkId}`
-    // compare read methods in the SAME request
-    out.findOneResult = await getUsersCollection().findOne({ clerkId })
-    out.unsafeRead = await db.unsafe('SELECT id, days_left, has_used_free_days FROM users WHERE clerk_id = $1', [clerkId])
-    // A) tagged-template write (no transaction)
-    const upd = await db`UPDATE users SET days_left = 99 WHERE clerk_id = ${clerkId}`
-    out.taggedUpdateCount = upd.count
-    out.rowsAfterTagged = await db`SELECT id, days_left FROM users WHERE clerk_id = ${clerkId}`
-    // B) unsafe write
-    const upd2 = await db.unsafe(`UPDATE users SET days_left = 88 WHERE clerk_id = $1`, [clerkId])
-    out.unsafeUpdateCount = (upd2 as any).count
-    out.rowsAfterUnsafe = await db`SELECT id, days_left FROM users WHERE clerk_id = ${clerkId}`
-    // total transactions for this user
-    out.txCount = (await db`SELECT count(*)::int AS n FROM subscription_transactions WHERE user_id = ${clerkId}`)[0]?.n
-  } catch (e: any) {
-    out.error = e.message
-  }
-  return c.json(out)
-})
 
 // ============= AUTH ROUTES =============
 app.get('/api/auth/me', clerkAuth, async (c) => {
