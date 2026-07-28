@@ -28,6 +28,9 @@ app.get('/api/debug/write', async (c) => {
   const out: any = {}
   try {
     out.rowsBefore = await db`SELECT id, clerk_id, days_left, has_used_free_days, is_new_user FROM users WHERE clerk_id = ${clerkId}`
+    // compare read methods in the SAME request
+    out.findOneResult = await getUsersCollection().findOne({ clerkId })
+    out.unsafeRead = await db.unsafe('SELECT id, days_left, has_used_free_days FROM users WHERE clerk_id = $1', [clerkId])
     // A) tagged-template write (no transaction)
     const upd = await db`UPDATE users SET days_left = 99 WHERE clerk_id = ${clerkId}`
     out.taggedUpdateCount = upd.count
