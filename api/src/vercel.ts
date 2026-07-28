@@ -15,6 +15,18 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
 // frontend calls e.g. /api/subscription while routes are /api/subscription/.
 const app = new Hono({ strict: false })
 
+// Surface the real error instead of an opaque "Internal Server Error". Logs the
+// full error server-side and returns the message (plus a short stack) so a
+// failing route is diagnosable. TEMP: trim the stack from the response later.
+app.onError((err, c) => {
+  console.error('[onError]', c.req.method, c.req.path, err instanceof Error ? (err.stack || err.message) : err)
+  return c.json({
+    error: 'Internal server error',
+    message: err instanceof Error ? err.message : String(err),
+    stack: err instanceof Error ? (err.stack || '').split('\n').slice(0, 6) : undefined,
+  }, 500)
+})
+
 app.use('*', logger())
 app.use('*', cors({
   credentials: true,
