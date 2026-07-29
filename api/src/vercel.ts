@@ -15,16 +15,11 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
 // frontend calls e.g. /api/subscription while routes are /api/subscription/.
 const app = new Hono({ strict: false })
 
-// Surface the real error instead of an opaque "Internal Server Error". Logs the
-// full error server-side and returns the message (plus a short stack) so a
-// failing route is diagnosable. TEMP: trim the stack from the response later.
+// Log the full error server-side (visible in Vercel runtime logs) but return a
+// generic message to the client so internals aren't leaked.
 app.onError((err, c) => {
   console.error('[onError]', c.req.method, c.req.path, err instanceof Error ? (err.stack || err.message) : err)
-  return c.json({
-    error: 'Internal server error',
-    message: err instanceof Error ? err.message : String(err),
-    stack: err instanceof Error ? (err.stack || '').split('\n').slice(0, 6) : undefined,
-  }, 500)
+  return c.json({ error: 'Internal server error' }, 500)
 })
 
 app.use('*', logger())
@@ -46,22 +41,6 @@ app.use('*', async (c, next) => {
 })
 
 app.get('/health', (c) => c.json({ status: 'ok', timestamp: new Date().toISOString() }))
-
-// TEMP diagnostic: report the HOST (no credentials) of each DB env var so we can
-// see which one is the IPv4 pooler vs the IPv6-only direct host. Remove later.
-app.get('/api/debug/dbhosts', (c) => {
-  const keys = ['DATABASE_URL', 'DATABASE_URL_UNPOOLED', 'POSTGRES_URL', 'POSTGRES_URL_NON_POOLING', 'POSTGRES_PRISMA_URL', 'POSTGRES_URL_NO_SSL']
-  const out: Record<string, string> = {}
-  for (const k of keys) {
-    const v = process.env[k] || ''
-    if (!v) { out[k] = '(empty)'; continue }
-    try {
-      const u = new URL(v.replace(/^postgres(ql)?:/, 'http:'))
-      out[k] = u.hostname + ':' + (u.port || '5432') + u.pathname + (u.search || '')
-    } catch { out[k] = '(unparseable len=' + v.length + ')' }
-  }
-  return c.json(out)
-})
 
 // ============= AUTH ROUTES =============
 app.get('/api/auth/me', clerkAuth, async (c) => {
