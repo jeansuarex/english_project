@@ -10,6 +10,19 @@ import { randomBytes } from 'crypto'
 function isDirectSupabase(u: string): boolean {
   return /db\.[a-z0-9]+\.supabase\.co/i.test(u)
 }
+// Rewrite a Supabase DIRECT url (postgres://postgres:PASS@db.<ref>.supabase.co
+// :5432/postgres — IPv6-only, unreachable from Vercel) to the IPv4 transaction
+// POOLER (postgres://postgres.<ref>:PASS@<host>:6543/postgres). The pooler host
+// region defaults to us-west-2 (derived from the DB's AWS IPv6 range) and can be
+// overridden with SUPABASE_POOLER_HOST. The password is taken straight from the
+// existing env value; it is never logged.
+function toSupabasePooler(direct: string): string | null {
+  const m = direct.match(/^(postgres(?:ql)?):\/\/[^:]+:([^@]+)@db\.([a-z0-9]+)\.supabase\.co(?::\d+)?\/(.*)$/i)
+  if (!m) return null
+  const [, scheme, pass, ref, rest] = m
+  const host = process.env.SUPABASE_POOLER_HOST || 'aws-0-us-west-2.pooler.supabase.com'
+  return `${scheme}://postgres.${ref}:${pass}@${host}:6543/${rest || 'postgres'}`
+}
 function pickDbUrl(): string {
   const candidates = [
     process.env.POSTGRES_URL,
@@ -22,7 +35,10 @@ function pickDbUrl(): string {
   if (pooler) return pooler
   const nonDirect = candidates.find((u) => !isDirectSupabase(u))
   if (nonDirect) return nonDirect
-  return candidates[0] || ''
+  // Only the IPv6-only direct Supabase host is available -> rewrite to pooler.
+  const direct = candidates[0]
+  if (direct) return toSupabasePooler(direct) || direct
+  return ''
 }
 const DB_URL = pickDbUrl()
 if (!DB_URL) throw new Error('DATABASE_URL is required')
