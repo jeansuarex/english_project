@@ -1,19 +1,34 @@
 import postgres from 'postgres'
 import { randomBytes } from 'crypto'
 
-// The live database is NEON, reachable via the Neon-integration vars
-// (*_UNPOOLED / NON_POOLING). DATABASE_URL / POSTGRES_URL were repointed to a
-// now-dead Supabase host during an abandoned migration (queries failed with
-// "getaddrinfo ENOTFOUND db.<...>.supabase.co"), so those must NOT be used
-// first — only as a last-resort fallback.
-const DB_URL = process.env.DATABASE_URL_UNPOOLED
-  || process.env.POSTGRES_URL_NON_POOLING
-  || process.env.DATABASE_URL
-  || process.env.POSTGRES_URL
+// The database is Supabase. Its DIRECT host (db.<ref>.supabase.co) is IPv6-only,
+// but Vercel serverless is IPv4-only, so any var pointing at the direct host
+// fails with "getaddrinfo ENOTFOUND". We must use the connection POOLER
+// (<...>.pooler.supabase.com), which is IPv4-reachable. Pick, across all
+// candidate vars, the first pooler URL; otherwise any non-direct URL; only then
+// fall back to whatever exists.
+function isDirectSupabase(u: string): boolean {
+  return /db\.[a-z0-9]+\.supabase\.co/i.test(u)
+}
+function pickDbUrl(): string {
+  const candidates = [
+    process.env.POSTGRES_URL,
+    process.env.POSTGRES_PRISMA_URL,
+    process.env.DATABASE_URL,
+    process.env.DATABASE_URL_UNPOOLED,
+    process.env.POSTGRES_URL_NON_POOLING,
+  ].filter((v): v is string => !!v)
+  const pooler = candidates.find((u) => /pooler\.supabase\.com/i.test(u))
+  if (pooler) return pooler
+  const nonDirect = candidates.find((u) => !isDirectSupabase(u))
+  if (nonDirect) return nonDirect
+  return candidates[0] || ''
+}
+const DB_URL = pickDbUrl()
 if (!DB_URL) throw new Error('DATABASE_URL is required')
 
-// prepare:false is required for Neon's pooled (PgBouncer) endpoint and harmless
-// on the direct one. Small pool keeps us serverless-friendly.
+// prepare:false is required for the Supabase transaction pooler (PgBouncer).
+// Small pool keeps us serverless-friendly.
 const db = postgres(DB_URL, { prepare: false, max: 5, idle_timeout: 20 })
 
 let initialized = false
