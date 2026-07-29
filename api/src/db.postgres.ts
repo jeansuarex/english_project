@@ -20,7 +20,7 @@ function toSupabasePooler(direct: string): string | null {
   const m = direct.match(/^(postgres(?:ql)?):\/\/[^:]+:([^@]+)@db\.([a-z0-9]+)\.supabase\.co(?::\d+)?\/(.*)$/i)
   if (!m) return null
   const [, scheme, pass, ref, rest] = m
-  const host = process.env.SUPABASE_POOLER_HOST || 'aws-0-us-west-2.pooler.supabase.com'
+  const host = process.env.SUPABASE_POOLER_HOST || 'aws-1-us-west-2.pooler.supabase.com'
   return `${scheme}://postgres.${ref}:${pass}@${host}:6543/${rest || 'postgres'}`
 }
 function pickDbUrl(): string {
